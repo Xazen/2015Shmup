@@ -17,10 +17,10 @@ public class SpawnController : MonoBehaviour
         EnemyController.BecameInvisible += OnEnemyBecamInvisible;
         EnemyController.TriggerEnter += OnCollisionEnterEnemy;
 
+        gameArea = GameController.GameArea;
+
         // Spawn enemies
         StartCoroutine("SpawnEnemies");
-
-        gameArea = GameController.GameArea;
 	}
 
     #region enemy spawn and despawn
@@ -36,7 +36,7 @@ public class SpawnController : MonoBehaviour
             Vector3 enemyPosition = new Vector3(
                 UnityEngine.Random.Range(gameArea.left+enemyColliderSize.x/2, gameArea.right-enemyColliderSize.x/2),
                 0,
-                gameArea.top + enemyColliderSize.z);
+                gameArea.top - enemyColliderSize.z);
 
             enemy.transform.position = enemyPosition;
 

@@ -38,6 +38,8 @@ public class GameController : MonoBehaviour
     public static InputController InputController;
     public static Border GameArea;
 
+    private float pausedTimeScale;
+
 	// Use this for initialization
 	void Start () 
     {
@@ -56,4 +58,18 @@ public class GameController : MonoBehaviour
             upperRight.x
             );
 	}
+
+    public void TriggerPause()
+    {
+        if (Time.timeScale > 0)
+        {
+            pausedTimeScale = Time.timeScale;
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = pausedTimeScale;
+        }
+        
+    }
 }
