@@ -40,8 +40,8 @@ public class PlayerController : MonoBehaviour
         playerHealth.healthDepletedEvent += OnHealthDepleted;
 
         // Setup bullet event
-        Bullet.BecameInvisibleEvent += OnBulletBecameInvisible;
-        Bullet.TriggerEvent += OnBulletCollision;
+        PlayerBullet.BecameInvisibleEvent += OnBulletBecameInvisible;
+        PlayerBullet.TriggerEvent += OnBulletCollision;
 
         // Setup input delegates
         GameController.InputController.keyDownDelegate += OnKeyDown;
@@ -58,6 +58,27 @@ public class PlayerController : MonoBehaviour
         if (playerRigidbody.velocity != moveDirection * speed)
         {
             playerRigidbody.velocity = moveDirection * speed;
+        }
+
+        // Keep the player inside the game area
+        Border gameArea = GameController.GameArea;
+        Vector3 playerSize = GetComponent<Collider>().bounds.size;
+        if (transform.position.x + playerSize.x / 2 > gameArea.right)
+        {
+            transform.position = new Vector3(gameArea.right - playerSize.x / 2, 0, transform.position.z);
+        } 
+        else if (transform.position.x - playerSize.x / 2 < gameArea.left)
+        {
+            transform.position = new Vector3(gameArea.left + playerSize.x / 2, 0, transform.position.z);
+        }
+
+        if (transform.position.z - playerSize.z / 2 < gameArea.bottom)
+        {
+            transform.position = new Vector3(transform.position.x, 0, gameArea.bottom + playerSize.z / 2);
+        }
+        else if (transform.position.z + playerSize.z / 2 > gameArea.top)
+        {
+            transform.position = new Vector3(transform.position.x, 0, gameArea.top - playerSize.z / 2);
         }
 
         // Stop the player if its close enought to the destination given by the mouse
