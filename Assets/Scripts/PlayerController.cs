@@ -78,6 +78,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnMousePositionChanged(Vector3 newPosition)
     {
-
+        moveAmount = (newPosition-this.transform.position).normalized;   
     }
 }

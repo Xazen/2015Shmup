@@ -65,8 +65,21 @@ public class InputController : MonoBehaviour
                 // Call only if mouse position had changed since last update
                 if (currentMousePosition != Input.mousePosition)
                 {
+                    // Get the screen space for x and y
                     currentMousePosition = Input.mousePosition;
-                    mousePositionChangedDelegate(currentMousePosition);
+
+                    // Set the z value to position the mouse position in 3D space
+                    // It should be on the same level as the player. Since the player is positioned at zero, the required z value is the same as the camera's y value
+                    currentMousePosition.z = Camera.main.transform.position.y;
+
+                    // Convert mouse positon from screen space to world space
+                    Vector3 mouseWorldSpace = Camera.main.ScreenToWorldPoint(currentMousePosition);
+
+                    // Set y to 0 since it is not required for the player movement.
+                    mouseWorldSpace.y = 0;
+
+                    // Call delegate methods
+                    mousePositionChangedDelegate(mouseWorldSpace);
                 }
             }
         }
