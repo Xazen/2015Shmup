@@ -59,17 +59,62 @@ public class GameController : MonoBehaviour
             );
 	}
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            TriggerPause();
+        }
+    }
+
+    /// <summary>
+    /// Pause and resume the game
+    /// </summary>
     public void TriggerPause()
     {
+        // Pause the game
         if (Time.timeScale > 0)
         {
-            pausedTimeScale = Time.timeScale;
-            Time.timeScale = 0;
+            Pause();
         }
         else
         {
-            Time.timeScale = pausedTimeScale;
+            Unpause();
         }
-        
+    }
+
+    /// <summary>
+    /// Pause the game
+    /// </summary>
+    public void Pause()
+    {
+        // Keep the current time scale
+        pausedTimeScale = Time.timeScale;
+        Time.timeScale = 0;
+    }
+
+    /// <summary>
+    /// Unpause the game
+    /// </summary>
+    public void Unpause()
+    {
+        // Return to previous time scale
+        Time.timeScale = pausedTimeScale;
+    }
+
+    /// <summary>
+    /// Show game over screen
+    /// </summary>
+    public void ShowGameOver()
+    {
+        Pause();
+    }
+
+    /// <summary>
+    /// Hide game over screen
+    /// </summary>
+    public void HideGameOver()
+    {
+        Unpause();
     }
 }
