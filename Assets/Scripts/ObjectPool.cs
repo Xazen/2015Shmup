@@ -14,6 +14,10 @@ public class ObjectPool : MonoBehaviour
     
     protected void Start()
     {
+        // Create an empty game object as a folder
+        GameObject parentGameObject = new GameObject();
+        parentGameObject.name = pooledGameObject.name;
+
         // Setup the list for game objects
         gameObjectList = new List<GameObject>();
 
@@ -26,8 +30,9 @@ public class ObjectPool : MonoBehaviour
             // Deactivate the object for later use
             obj.SetActive(false);
 
-            // Add the object to the list
+            // Add the object to the list and the parent game object
             gameObjectList.Add(obj);
+            obj.transform.SetParent(parentGameObject.transform);
         }
     }
 
@@ -41,7 +46,7 @@ public class ObjectPool : MonoBehaviour
         {
             if (!gameObjectList[i].activeSelf)
             {
-                pooledGameObject.SetActive(true);
+                gameObjectList[i].SetActive(true);
                 return gameObjectList[i];
             }
         }

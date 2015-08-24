@@ -7,8 +7,8 @@ public class Bullet : MonoBehaviour
     private float speed = 20.0f;
 
     // A event to notify other classes that it became invisible
-    public delegate void BecomeInvisible(GameObject bullet);
-    public static event BecomeInvisible becomeInvisible;
+    public delegate void BulletDelegate(GameObject bullet);
+    public static event BulletDelegate BecameInvisible;
 
 	protected void Start () 
     {
@@ -18,9 +18,9 @@ public class Bullet : MonoBehaviour
 
     protected void OnBecameInvisible()
     {
-        if (becomeInvisible != null)
+        if (BecameInvisible != null)
         {
-            becomeInvisible(gameObject);
+            BecameInvisible(gameObject);
         }
     }
 }
