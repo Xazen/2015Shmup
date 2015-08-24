@@ -70,10 +70,11 @@ public class InputController : MonoBehaviour
 
                     // Set the z value to position the mouse position in 3D space
                     // It should be on the same level as the player. Since the player is positioned at zero, the required z value is the same as the camera's y value
-                    currentMousePosition.z = Camera.main.transform.position.y;
+                    Vector3 mousePositionIn3DSpace = currentMousePosition;
+                    mousePositionIn3DSpace.z = Camera.main.transform.position.y;
 
                     // Convert mouse positon from screen space to world space
-                    Vector3 mouseWorldSpace = Camera.main.ScreenToWorldPoint(currentMousePosition);
+                    Vector3 mouseWorldSpace = Camera.main.ScreenToWorldPoint(mousePositionIn3DSpace);
 
                     // Set y to 0 since it is not required for the player movement.
                     mouseWorldSpace.y = 0;

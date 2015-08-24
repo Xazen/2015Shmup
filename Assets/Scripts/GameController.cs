@@ -9,11 +9,7 @@ public class GameController : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
-        Debug.Log("start game controller");
+        // Setup variables
         InputController = GetComponent<InputController>();
-        if (InputController == null)
-        {
-            Debug.LogError("No InputController found in " + this.gameObject.name + ". Add an InputController script as component.");
-        }
 	}
 }
