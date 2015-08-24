@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
 
         // Setup bullet event
         Bullet.BecameInvisible += OnBulletBecameInvisible;
+        Bullet.CollisionDelegate += OnBulletCollision;
 
         // Setup keyboard control
         keyboardControl = GameController.InputController.keyboardKeyCodes;
@@ -147,6 +148,14 @@ public class PlayerController : MonoBehaviour
     public void OnBulletBecameInvisible(GameObject bullet)
     {
         bulletPool.ReturnGameObject(bullet);
+    }
+
+    public void OnBulletCollision(GameObject bullet, Collision col)
+    {
+        if (col.collider.CompareTag(MainController.Tags.ENEMY))
+        {
+            bulletPool.ReturnGameObject(bullet);
+        }
     }
     #endregion
 }

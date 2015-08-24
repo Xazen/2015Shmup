@@ -10,17 +10,27 @@ public class Bullet : MonoBehaviour
     public delegate void BulletDelegate(GameObject bullet);
     public static event BulletDelegate BecameInvisible;
 
-	protected void Start () 
+    public delegate void BulletCollisionDelegate(GameObject bullet, Collision col);
+    public static event BulletCollisionDelegate CollisionDelegate;
+
+	protected void OnEnable() 
     {
         // Set speed of the bullet
         GetComponent<Rigidbody>().SetVelocityZ(speed);
 	}
 
+    #region delegate methods
     protected void OnBecameInvisible()
     {
         if (BecameInvisible != null)
         {
-            BecameInvisible(gameObject);
+            BecameInvisible(this.gameObject);
         }
     }
+
+    public void OnCollisionEnter(Collision col)
+    {
+        CollisionDelegate(this.gameObject, col);
+    }
+    #endregion
 }

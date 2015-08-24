@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 
+#region border implementation
 /// <summary>
 /// Border class is used to determine a border. e.g. game viewport.
 /// </summary>
@@ -30,6 +31,7 @@ public struct Border
             "right  : " + this.right);
     }
 }
+#endregion
 
 public class SpawnController : MonoBehaviour 
 {
@@ -55,9 +57,15 @@ public class SpawnController : MonoBehaviour
             upperRight.x
             );
 
+        // Setup event
+        EnemyController.BecameInvisible += OnEnemyBecamInvisible;
+        EnemyController.CollisionEnter += OnCollisionEnterEnemy;
+
+        // Spawn enemies
         StartCoroutine("SpawnEnemies");
 	}
 
+    #region enemy spawn and despawn
     public IEnumerator SpawnEnemies()
     {
         while (true)
@@ -71,4 +79,18 @@ public class SpawnController : MonoBehaviour
             }
         }
     }
+
+    public void OnEnemyBecamInvisible(GameObject enemy)
+    {
+        enemyPool.ReturnGameObject(enemy);
+    }
+
+    public void OnCollisionEnterEnemy(GameObject enemy, Collision col)
+    {
+        if (col.collider.CompareTag(MainController.Tags.BULLET))
+        {
+            enemyPool.ReturnGameObject(enemy);
+        }
+    }
+    #endregion
 }
