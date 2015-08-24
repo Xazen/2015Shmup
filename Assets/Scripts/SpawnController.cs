@@ -59,7 +59,7 @@ public class SpawnController : MonoBehaviour
 
         // Setup event
         EnemyController.BecameInvisible += OnEnemyBecamInvisible;
-        EnemyController.CollisionEnter += OnCollisionEnterEnemy;
+        EnemyController.TriggerEnter += OnCollisionEnterEnemy;
 
         // Spawn enemies
         StartCoroutine("SpawnEnemies");
@@ -95,9 +95,9 @@ public class SpawnController : MonoBehaviour
         enemyPool.ReturnGameObject(enemy);
     }
 
-    public void OnCollisionEnterEnemy(GameObject enemy, Collision col)
+    public void OnCollisionEnterEnemy(GameObject enemy, Collider col)
     {
-        if (col.collider.CompareTag(MainController.Tags.BULLET))
+        if (col.CompareTag(MainController.Tags.BULLET))
         {
             enemyPool.ReturnGameObject(enemy);
         }

@@ -8,10 +8,10 @@ public class Bullet : MonoBehaviour
 
     // A event to notify other classes that it became invisible
     public delegate void BulletDelegate(GameObject bullet);
-    public static event BulletDelegate BecameInvisible;
+    public static event BulletDelegate BecameInvisibleEvent;
 
-    public delegate void BulletCollisionDelegate(GameObject bullet, Collision col);
-    public static event BulletCollisionDelegate CollisionDelegate;
+    public delegate void BulletTriggerDelegate(GameObject bullet, Collider col);
+    public static event BulletTriggerDelegate TriggerEvent;
 
 	protected void OnEnable() 
     {
@@ -20,17 +20,20 @@ public class Bullet : MonoBehaviour
 	}
 
     #region delegate methods
-    protected void OnBecameInvisible()
+    /// <summary>
+    /// This is used on an empty parent object to group objects. Make sure that the bullet is invisible in the scene view as well (not only game view) otherwise this method will not be triggered.
+    /// </summary>
+    void OnBecameInvisible()
     {
-        if (BecameInvisible != null)
+        if (BecameInvisibleEvent != null)
         {
-            BecameInvisible(this.gameObject);
+            BecameInvisibleEvent(this.gameObject);
         }
     }
 
-    public void OnCollisionEnter(Collision col)
+    public void OnTriggerEnter(Collider col)
     {
-        CollisionDelegate(this.gameObject, col);
+        TriggerEvent(this.gameObject, col);
     }
     #endregion
 }

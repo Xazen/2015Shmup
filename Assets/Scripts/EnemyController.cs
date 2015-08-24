@@ -6,28 +6,23 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private float speed = 10.0f;
     public int scoreValue = 100;
+    public int collisionDamage = 1;
 
     // A event to notify other classes that it became invisible
     public delegate void EnemyDelegate(GameObject enemy);
     public static event EnemyDelegate BecameInvisible;
     public static event EnemyDelegate EnemyDied;
 
-    public delegate void EnemyCollisionDelegate(GameObject enemy, Collision col);
-    public static event EnemyCollisionDelegate CollisionEnter;
+    public delegate void EnemyTriggerDelegate(GameObject enemy, Collider col);
+    public static event EnemyTriggerDelegate TriggerEnter;
 
 	// Use this for initialization
-	void Start () 
+	void OnEnable () 
     {
         GetComponent<Rigidbody>().velocity = Vector3.forward * speed;
 	}
 	
-	// Update is called once per frame
-	void Update () 
-    {
-	
-	}
-
-    protected void OnBecameInvisible()
+    void OnBecameInvisible()
     {
         if (BecameInvisible != null)
         {
@@ -35,15 +30,15 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    public void OnCollisionEnter(Collision col)
+    public void OnTriggerEnter(Collider col)
     {
-        if (CollisionEnter != null)
+        if (TriggerEnter != null)
         {
             if (EnemyDied != null)
             {
                 EnemyDied(this.gameObject);
             }
-            CollisionEnter(this.gameObject, col);
+            TriggerEnter(this.gameObject, col);
         }
     }
 }

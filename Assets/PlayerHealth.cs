@@ -14,7 +14,7 @@ public class PlayerHealth : MonoBehaviour
 
     // Delegate
     public delegate void PlayerHealthDepleted();
-    public event PlayerHealthDepleted healthDepleted;
+    public event PlayerHealthDepleted healthDepletedEvent;
 
 	// Use this for initialization
 	void Start () 
@@ -31,9 +31,9 @@ public class PlayerHealth : MonoBehaviour
         currentLife -= Mathf.Min(value, currentLife);
         healthUI.DecreaseHealth(value);
 
-        if (currentLife <= 0 && healthDepleted != null)
+        if (currentLife <= 0 && healthDepletedEvent != null)
         {
-            healthDepleted();
+            healthDepletedEvent();
         }
     }
 

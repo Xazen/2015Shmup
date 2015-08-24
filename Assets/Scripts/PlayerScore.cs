@@ -12,7 +12,7 @@ public class PlayerScore : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
-        EnemyController.CollisionEnter += OnCollisionEnterEnemy;
+        EnemyController.TriggerEnter += OnCollisionEnterEnemy;
 	}
 	
 	// Update is called once per frame
@@ -21,9 +21,9 @@ public class PlayerScore : MonoBehaviour
 	    
 	}
 
-    public void OnCollisionEnterEnemy(GameObject enemy, Collision col)
+    public void OnCollisionEnterEnemy(GameObject enemy, Collider col)
     {
-        if (col.collider.CompareTag(MainController.Tags.BULLET))
+        if (col.CompareTag(MainController.Tags.BULLET))
         {
             score += enemy.GetComponent<EnemyController>().scoreValue;
             scoreUi.SetScore(score);

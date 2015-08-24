@@ -3,6 +3,13 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour 
 {
+    // Health
+    [SerializeField]
+    private PlayerHealth playerHealth;
+
+    public delegate void PlayerTriggerDelegate(GameObject player, Collider col);
+    public event PlayerTriggerDelegate triggerEvent;
+
     // Movement
     [SerializeField]
     private float speed = 20.0f;
@@ -19,19 +26,22 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private float holdFireRate = 0.3f;
-
+    
     #region setup
     // Use this for initialization
 	void Start () 
     {
         playerRigidbody = GetComponent<Rigidbody>();
 
-        // Setup bullet event
-        Bullet.BecameInvisible += OnBulletBecameInvisible;
-        Bullet.CollisionDelegate += OnBulletCollision;
-
         // Setup keyboard control
         keyboardControl = GameController.InputController.keyboardKeyCodes;
+
+        // Setup player health event
+        playerHealth.healthDepletedEvent += OnHealthDepleted;
+
+        // Setup bullet event
+        Bullet.BecameInvisibleEvent += OnBulletBecameInvisible;
+        Bullet.TriggerEvent += OnBulletCollision;
 
         // Setup input delegates
         GameController.InputController.keyDownDelegate += OnKeyDown;
@@ -71,6 +81,43 @@ public class PlayerController : MonoBehaviour
                 yield return new WaitForFixedUpdate();
             }
         } while (true);
+    }
+    #endregion
+
+    #region collision
+    public void OnTriggerEnter(Collider col)
+    {
+        // Call event
+        if (triggerEvent != null)
+        {
+            triggerEvent(this.gameObject, col);
+        }
+
+        // Reduce health
+        if (col.CompareTag(MainController.Tags.ENEMY))
+        {
+            playerHealth.DecreaseLife(col.gameObject.GetComponent<EnemyController>().collisionDamage);
+        }
+    }
+    #endregion
+
+    #region gameplay events
+    public void OnHealthDepleted()
+    {
+        //TODO Show gameover
+    }
+
+    public void OnBulletBecameInvisible(GameObject bullet)
+    {
+        bulletPool.ReturnGameObject(bullet);
+    }
+
+    public void OnBulletCollision(GameObject bullet, Collider col)
+    {
+        if (col.CompareTag(MainController.Tags.ENEMY))
+        {
+            bulletPool.ReturnGameObject(bullet);
+        }
     }
     #endregion
 
@@ -145,21 +192,6 @@ public class PlayerController : MonoBehaviour
     {
         mouseTargetPosition = newPosition;
         moveDirection = (newPosition-this.transform.position).normalized;
-    }
-    #endregion
-
-    #region bullet event
-    public void OnBulletBecameInvisible(GameObject bullet)
-    {
-        bulletPool.ReturnGameObject(bullet);
-    }
-
-    public void OnBulletCollision(GameObject bullet, Collision col)
-    {
-        if (col.collider.CompareTag(MainController.Tags.ENEMY))
-        {
-            bulletPool.ReturnGameObject(bullet);
-        }
     }
     #endregion
 }
