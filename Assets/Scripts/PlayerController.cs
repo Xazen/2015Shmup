@@ -3,22 +3,25 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour 
 {
+    // Movement
     [SerializeField]
     private float speed = 20.0f;
-    
+
     private Vector3 moveDirection = Vector3.zero;
     private Vector3 mouseTargetPosition = Vector3.zero;
 
     private KeyboardControl keyboardControl;
     private Rigidbody playerRigidbody;
 
+    // Fire
     [SerializeField]
     private ObjectPool bulletPool;
 
     [SerializeField]
     private float holdFireRate = 0.3f;
 
-	// Use this for initialization
+    #region setup
+    // Use this for initialization
 	void Start () 
     {
         playerRigidbody = GetComponent<Rigidbody>();
@@ -36,7 +39,9 @@ public class PlayerController : MonoBehaviour
         GameController.InputController.keyUpDelegate += OnKeyUp;
         GameController.InputController.mousePositionChangedDelegate += OnMousePositionChanged;
 	}
+    #endregion
 
+    #region actions
     protected void Update()
     {
         // Update player movement
@@ -52,7 +57,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    #region actions
     public IEnumerator Fire()
     {
         // Loop fire
