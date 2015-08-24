@@ -70,9 +70,19 @@ public class SpawnController : MonoBehaviour
     {
         while (true)
         {
+            // Get an enemy from object pool
             GameObject enemy = enemyPool.GetGameObject();
-            enemy.transform.position = new Vector3(0, 0, gameArea.top + 2);
 
+            // Setup position
+            Vector3 enemyColliderSize = enemy.GetComponent<Collider>().bounds.size;
+            Vector3 enemyPosition = new Vector3(
+                UnityEngine.Random.Range(gameArea.left+enemyColliderSize.x/2, gameArea.right-enemyColliderSize.x/2),
+                0,
+                gameArea.top + enemyColliderSize.z);
+
+            enemy.transform.position = enemyPosition;
+
+            // Wait for spawn rate
             for (float timer = 0; timer < spawnRate; timer += Time.fixedDeltaTime)
             {
                 yield return new WaitForFixedUpdate();

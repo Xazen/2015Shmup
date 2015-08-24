@@ -28,6 +28,7 @@ GameObject:
   - 54: {fileID: 5411174}
   - 114: {fileID: 11475696}
   - 114: {fileID: 11400794}
+  - 114: {fileID: 11415724}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -119,6 +120,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pooledGameObject: {fileID: 108930, guid: 5cf0418f8c9804c428aa160733897810, type: 2}
   poolCount: 20
+--- !u!114 &11415724
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a883ae23f425934eb1751139c436e8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreUi: {fileID: 0}
 --- !u!114 &11475696
 MonoBehaviour:
   m_ObjectHideFlags: 1

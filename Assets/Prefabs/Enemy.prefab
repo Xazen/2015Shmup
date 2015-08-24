@@ -11,6 +11,7 @@ GameObject:
   - 114: {fileID: 11496362}
   - 54: {fileID: 5462108}
   - 23: {fileID: 2390386}
+  - 65: {fileID: 6588042}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -42,7 +43,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 141826}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: .649999976, y: 0, z: 3.69000006}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 499060}
@@ -122,14 +123,26 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 141826}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 1.00000001e-07
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 0
+--- !u!65 &6588042
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 141826}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: .800000012, y: .25, z: 1}
+  m_Center: {x: 0, y: .125, z: .100000001}
 --- !u!114 &11496362
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -142,6 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: -3
+  scoreValue: 100
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -163,11 +177,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Constraints
-      value: 112
+      value: 116
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_TagString
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Mass
+      value: 1.00000001e-07
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
