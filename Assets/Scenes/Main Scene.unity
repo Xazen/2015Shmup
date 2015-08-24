@@ -95,6 +95,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 597433712}
+  - 114: {fileID: 597433713}
+  - 114: {fileID: 597433714}
   m_Layer: 0
   m_Name: Main Controller
   m_TagString: Untagged
@@ -114,3 +116,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &597433713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 597433711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e368688219288b0408b5ec8c591470bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &597433714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 597433711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eee87767a57de94e989d6f5fcdb2233, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

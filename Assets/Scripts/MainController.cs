@@ -3,11 +3,24 @@ using System.Collections;
 
 public class MainController : MonoBehaviour
 {
-    public class SceneNames
+    #region constants
+    public static class SceneNames
     {
-        public static string MENU_SCENE = "Menu Scene";
-        public static string GAME_SCENE = "Game Scene";
+        public static readonly string MENU_SCENE = "Menu Scene";
+        public static readonly string GAME_SCENE = "Game Scene";
     }
+
+    public static class Tags
+    {
+        public static readonly string PLAYER = "Player";
+        public static readonly string ENEMY = "Enemy";
+        public static readonly string BULLET = "Bullet";
+    }
+    #endregion
+
+    #region further singletons
+    HighscoreController highscoreController;
+    #endregion
 
     #region variables
     private static MainController mainController;
@@ -51,6 +64,9 @@ public class MainController : MonoBehaviour
 
         // Setup singleton
         mainController = this;
+
+        // Setup further singletons
+        highscoreController = GetComponent<HighscoreController>();
 
         // Setup the array of updateDelegates
         updateDelegates = new UpdateDelegate[(int)SceneState.Count];

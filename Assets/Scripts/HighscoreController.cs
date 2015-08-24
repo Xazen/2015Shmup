@@ -13,9 +13,6 @@ public class HighscoreController : MonoBehaviour
             if (_instance == null)
             {
                 _instance = GameObject.FindObjectOfType<HighscoreController>();
-
-                // Prevent Unity from destroying this object when loading another scene
-                DontDestroyOnLoad(_instance.gameObject);
             }
 
             return _instance;
