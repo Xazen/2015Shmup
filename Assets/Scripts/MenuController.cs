@@ -5,6 +5,6 @@ public class MenuController : MonoBehaviour
 {
     public void StartGame()
     {
-        Application.LoadLevel(1);
+        MainController.SwitchScene(MainController.SceneNames.GAME_SCENE);
     }
 }

@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 
 [Serializable]
-class KeyboardControl
+public class KeyboardControl
 {
     public KeyCode up = KeyCode.UpArrow;
     public KeyCode left = KeyCode.LeftArrow;
@@ -24,19 +24,20 @@ public class InputController : MonoBehaviour
 
     [SerializeField]
     private InputType inputType = InputType.Keyboard;
-
-    [SerializeField]
-    private KeyboardControl keyboardKeyCodes;
+    public KeyboardControl keyboardKeyCodes;
     #endregion
 
     #region delegates
-    private delegate void KeyCodeDelegate(KeyCode keyCode);
-    private delegate void Vector3Delegate(Vector3 vector3);
-    private KeyCodeDelegate keyDownDelegate;
-    private KeyCodeDelegate keyHoldDelegate;
-    private KeyCodeDelegate keyUpDelegate;
-    private Vector3Delegate mousePositionDelegate;
+    public delegate void KeyCodeDelegate(KeyCode keyCode);
+    public delegate void Vector3Delegate(Vector3 vector3);
+    
+    public KeyCodeDelegate keyDownDelegate;
+    public KeyCodeDelegate keyHoldDelegate;
+    public KeyCodeDelegate keyUpDelegate;
+    public Vector3Delegate mousePositionChangedDelegate;
     #endregion
+
+    private Vector3 currentMousePosition;
 
     #region logic
     // Update is called once per frame
@@ -58,9 +59,15 @@ public class InputController : MonoBehaviour
             // Call delegate for mouse button
             this.CallKeyDelegate(KeyCode.Mouse0);
 
-            if (mousePositionDelegate != null)
+            // Call mouse position delegate
+            if (mousePositionChangedDelegate != null)
             {
-                mousePositionDelegate(Input.mousePosition);
+                // Call only if mouse position had changed since last update
+                if (currentMousePosition != Input.mousePosition)
+                {
+                    currentMousePosition = Input.mousePosition;
+                    mousePositionChangedDelegate(currentMousePosition);
+                }
             }
         }
 	}
@@ -92,7 +99,7 @@ public class InputController : MonoBehaviour
         {
             if (keyUpDelegate != null)
             {
-                keyDownDelegate(keyCode);
+                keyUpDelegate(keyCode);
             }
         }
     }
