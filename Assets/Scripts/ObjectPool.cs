@@ -51,7 +51,7 @@ public class ObjectPool : MonoBehaviour
             }
         }
 
-        Debug.LogError("Object Pool empty. You should increase the pooled amount");
+        Debug.LogError("Object Pool empty for " + pooledGameObject.name + ". You should increase the pooled amount");
 
         return null;
     }

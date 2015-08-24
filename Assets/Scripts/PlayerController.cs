@@ -73,7 +73,8 @@ public class PlayerController : MonoBehaviour
     private void OnKeyDown(KeyCode keyCode)
     {
         // Start firing
-        if (keyCode == keyboardControl.shoot)
+        if (keyCode == keyboardControl.shoot ||
+            keyCode == KeyCode.Mouse0)
         {
             StartCoroutine("Fire");
         }
@@ -128,7 +129,8 @@ public class PlayerController : MonoBehaviour
         moveDirection = moveDirection.normalized;
 
         // Stop firing
-        if (keyCode == keyboardControl.shoot)
+        if (keyCode == keyboardControl.shoot ||
+            keyCode == KeyCode.Mouse0)
         {
             StopCoroutine("Fire");
         }
