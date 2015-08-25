@@ -12,6 +12,7 @@ public class MainController : MonoBehaviour
         public static readonly string MENU_SCENE = "Menu Scene";
         public static readonly string GAME_SCENE = "Game Scene";
         public static readonly string GAME_OVER_SCENE = "Game Over Scene";
+        public static readonly string HIGHSCORE_SCENE = "Highscore Scene";
     }
 
     public static class Tags

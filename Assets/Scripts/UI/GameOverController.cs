@@ -16,6 +16,7 @@ public class GameOverController : MonoBehaviour
     [SerializeField]
     private InputField inputField;
 
+    #region setup
     public void Awake()
     {
         // Insert the score of the player to the text
@@ -23,11 +24,13 @@ public class GameOverController : MonoBehaviour
 
         if (!MainController.HighscoreController.IsValid(MainController.PlayerScore.score))
         {
-            highscoreEntryText.text = "No Highscore!";
+            highscoreEntryText.text = "Yeah! No Highscore!";
             inputField.placeholder.GetComponent<Text>().text = "You like to be in? Try it!";
         }
     }
+    #endregion
 
+    #region actions
     public void StartGame()
     {
         MainController.HighscoreController.AddHighscoreEntry(inputField.text, MainController.PlayerScore.score);
@@ -39,4 +42,25 @@ public class GameOverController : MonoBehaviour
         MainController.HighscoreController.AddHighscoreEntry(inputField.text, MainController.PlayerScore.score);
         MainController.SwitchScene(MainController.SceneNames.MENU_SCENE);
     }
+    #endregion
+
+    #region destroy
+    protected void OnDestroy()
+    {
+        if (highscoreEntryText != null)
+        {
+            highscoreEntryText = null;
+        }
+
+        if (scoreText != null)
+        {
+            scoreText = null;
+        }
+
+        if (inputField != null)
+        {
+            inputField = null;
+        }
+    }
+    #endregion
 }

@@ -30,7 +30,7 @@ public class HighscoreController : MonoBehaviour
     private static HighscoreController _instance;
     private static string persistentDataName = "highscoreEntries.dat";
 
-    private List<HighscoreEntry> highscoreEntries;
+    public List<HighscoreEntry> highscoreEntries;
 
     #region setup
     protected void Start()
@@ -44,11 +44,9 @@ public class HighscoreController : MonoBehaviour
             highscoreEntries = new List<HighscoreEntry>();
             for (int i = 10; i > 0; i--)
             {
-                highscoreEntries.Add(new HighscoreEntry("Mr or Mrs " + i, 500 * i));
+                highscoreEntries.Add(new HighscoreEntry("Mr / Mrs " + (11 - i), 500 * i));
             }
         }
-
-        Print();
     }
     #endregion
 
@@ -177,6 +175,19 @@ public class HighscoreController : MonoBehaviour
     #region destroy
     protected void OnDestroy()
     {
+        if (highscoreEntries != null)
+        {
+            if (highscoreEntries.Count > 0)
+            {
+                for (int i = 0; i < highscoreEntries.Count; i++)
+                {
+                    highscoreEntries[i] = null;
+                }
+            }
+
+            highscoreEntries = null;
+        }
+
         _instance = null;
     }
     #endregion
