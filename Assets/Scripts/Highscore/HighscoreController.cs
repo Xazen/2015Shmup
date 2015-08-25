@@ -2,11 +2,25 @@
 using System.Collections;
 
 /// <summary>
+/// Represents a highscore entry
+/// </summary>
+public class HighscoreEntry
+{
+    public string Name;
+    public int Score;
+}
+
+/// <summary>
 /// Manages the highscore list
 /// </summary>
 public class HighscoreController : MonoBehaviour
 {
     private static HighscoreController _instance;
+
+    protected void Start()
+    {
+
+    }
 
     #region Singleton
     public static HighscoreController instance
