@@ -33,6 +33,9 @@ public struct Border
 }
 #endregion
 
+/// <summary>
+/// Manages all game objects that need to be accessible by various different scripts
+/// </summary>
 public class GameController : MonoBehaviour 
 {
     public InputController inputController;
@@ -75,14 +78,15 @@ public class GameController : MonoBehaviour
     }
     #endregion
 
-	// Use this for initialization
+    #region setup
+    // Use this for initialization
 	void Start () 
     {
         // Setup player health delegate
         player.GetComponent<PlayerHealth>().healthDepletedEvent += OnHealthDepleted;
 
         // Setup UI for player score
-        MainController.playerScore.Initialize(GameObject.FindObjectOfType<ScoreUI>());
+        MainController.PlayerScore.Initialize(GameObject.FindObjectOfType<ScoreUI>());
 
         // Setup variables
         inputController = GetComponent<InputController>();
@@ -99,16 +103,18 @@ public class GameController : MonoBehaviour
             upperRight.x
             );
 	}
+    #endregion
 
+    #region actions
     void Update()
     {
+        // Trigger pause when paused is pressed
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             TriggerPause();
         }
     }
 
-    #region actions
     /// <summary>
     /// Pause and resume the game
     /// </summary>
@@ -157,6 +163,23 @@ public class GameController : MonoBehaviour
     public void OnHealthDepleted()
     {
         ShowGameOver();
+    }
+    #endregion
+
+    #region destroy
+    protected void OnDestroy()
+    {
+        if (inputController != null)
+        {
+            inputController = null;
+        }
+
+        if (player != null)
+        {
+            player = null;
+        }
+
+        _instance = null;
     }
     #endregion
 }

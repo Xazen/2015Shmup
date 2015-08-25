@@ -12,6 +12,7 @@ public class HealthUI : MonoBehaviour
 
     private int currentHealth;
 
+    #region actions
     /// <summary>
     /// Reset the health back to max health
     /// </summary>
@@ -55,4 +56,15 @@ public class HealthUI : MonoBehaviour
     {
         healthImage.fillAmount = (float)((float)currentHealth / (float)maxHealth);
     }
+    #endregion
+
+    #region destroy
+    protected void OnDestroy()
+    {
+        if (healthImage != null)
+        {
+            healthImage = null;
+        }
+    }
+    #endregion
 }

@@ -3,6 +3,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
+/// <summary>
+/// This class manages multiple objects of a gameobject to avoid runtime allocations.
+/// </summary>
 public class ObjectPool : MonoBehaviour 
 {
     public GameObject pooledGameObject;
@@ -11,7 +14,8 @@ public class ObjectPool : MonoBehaviour
     private int poolCount;
 
     private List<GameObject> gameObjectList;
-    
+
+    #region setup
     protected void Start()
     {
         // Check if the required values are set
@@ -47,7 +51,9 @@ public class ObjectPool : MonoBehaviour
             obj.transform.SetParent(parentGameObject.transform);
         }
     }
+    #endregion
 
+    #region actions
     /// <summary>
     /// Return a game object from the pool. When there are no more left null is returned.
     /// </summary>
@@ -76,4 +82,33 @@ public class ObjectPool : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
+    #endregion
+
+    #region destroy
+    protected void OnDestroy()
+    {
+        if (gameObjectList != null && gameObjectList.Count > 0)
+        {
+            for (int i = 0; i < gameObjectList.Count; i++)
+            {
+                if (gameObjectList[i] != null)
+                {
+                    if (gameObjectList[i].activeSelf)
+                    {
+                        gameObjectList[i].SetActive(false);
+                    }
+
+                    gameObjectList[i] = null;
+                }
+            }
+
+            gameObjectList = null;
+        }
+
+        if (pooledGameObject != null)
+        {
+            pooledGameObject = null;
+        }
+    }
+    #endregion
 }

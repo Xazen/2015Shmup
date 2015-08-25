@@ -2,6 +2,9 @@
 using System;
 using System.Collections;
 
+/// <summary>
+/// Helper class to setup the keys to control the game with the keyboard
+/// </summary>
 [Serializable]
 public class KeyboardControl
 {
@@ -12,6 +15,9 @@ public class KeyboardControl
     public KeyCode shoot = KeyCode.Space;
 }
 
+/// <summary>
+/// Manages the input callbacks
+/// </summary>
 public class InputController : MonoBehaviour
 {
     #region insprector
@@ -115,6 +121,31 @@ public class InputController : MonoBehaviour
             {
                 keyUpDelegate(keyCode);
             }
+        }
+    }
+    #endregion
+
+    #region destroy
+    protected void OnDestroy()
+    {
+        if (keyDownDelegate != null)
+        {
+            keyDownDelegate = null;
+        }
+
+        if (keyHoldDelegate != null)
+        {
+            keyHoldDelegate = null;
+        }
+
+        if (keyUpDelegate != null)
+        {
+            keyUpDelegate = null;
+        }
+
+        if (mousePositionChangedDelegate != null)
+        {
+            mousePositionChangedDelegate = null;
         }
     }
     #endregion

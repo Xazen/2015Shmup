@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// This class manages the players heatlh and the health ui
+/// </summary>
 public class PlayerHealth : MonoBehaviour 
 {
     // Variables
@@ -16,12 +19,15 @@ public class PlayerHealth : MonoBehaviour
     public delegate void PlayerHealthDepleted();
     public event PlayerHealthDepleted healthDepletedEvent;
 
-	// Use this for initialization
+    #region setup
+    // Use this for initialization
 	void Start () 
     {
         ResetLife();
     }
+    #endregion
 
+    #region actions
     /// <summary>
     /// Decreases life
     /// </summary>
@@ -57,4 +63,20 @@ public class PlayerHealth : MonoBehaviour
 
         currentLife = maxLife;
     }
+    #endregion
+
+    #region destroy
+    protected void OnDestroy()
+    {
+        if (healthUI != null)
+        {
+            healthUI = null;
+        }
+
+        if (healthDepletedEvent != null)
+        {
+            healthDepletedEvent = null;
+        }
+    }
+    #endregion
 }

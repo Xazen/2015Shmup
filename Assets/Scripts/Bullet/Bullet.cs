@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Base class for all bullets with helpful events
+/// </summary>
 public abstract class Bullet : MonoBehaviour 
 {
     // A event to notify other classes that it became invisible
@@ -25,6 +28,22 @@ public abstract class Bullet : MonoBehaviour
     public void OnTriggerEnter(Collider col)
     {
         TriggerEvent(this.gameObject, col);
+    }
+
+    #endregion
+
+    #region destroy
+    public virtual void OnDestroy()
+    {
+        if (BecameInvisibleEvent != null)
+        {
+            BecameInvisibleEvent = null;
+        }
+
+        if (TriggerEvent != null)
+        {
+            TriggerEvent = null;
+        }
     }
     #endregion
 }

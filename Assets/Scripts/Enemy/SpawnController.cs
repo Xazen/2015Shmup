@@ -58,14 +58,7 @@ public class SpawnController : MonoBehaviour
     }
     #endregion
 
-    #region destroy
-    protected void OnDestroy()
-    {
-        StopAllCoroutines();
-    }
-    #endregion
-
-    #region action
+    #region actions
     /// <summary>
     /// Start spawning enemies
     /// </summary>
@@ -94,7 +87,7 @@ public class SpawnController : MonoBehaviour
     }
     #endregion
 
-    #region enemy and bullet events
+    #region events
     /// <summary>
     /// This event is called when an enemy requires a bullet
     /// </summary>
@@ -112,7 +105,11 @@ public class SpawnController : MonoBehaviour
     /// <param name="gameObject">The game object that became invisible</param>
     public void OnEnemyBecameInvisible(GameObject gameObject)
     {
-        enemyPool.ReturnGameObject(gameObject);
+        // The pool might had been destroyed by switching the scene
+        if (enemyPool != null)
+        {
+            enemyPool.ReturnGameObject(gameObject);
+        }
     }
 
     /// <summary>
@@ -124,7 +121,11 @@ public class SpawnController : MonoBehaviour
         // Enemy bullet became invisible
         if (gameObject.CompareTag(MainController.Tags.ENEMY_BULLET))
         {
-            enemyBulletPool.ReturnGameObject(gameObject);
+            // The pool might had been destroyed by switching the scene
+            if (enemyBulletPool != null)
+            {
+                enemyBulletPool.ReturnGameObject(gameObject);
+            }
         }
     }
 
@@ -156,6 +157,23 @@ public class SpawnController : MonoBehaviour
         {
             enemyBulletPool.ReturnGameObject(gameObject);
         }
+    }
+    #endregion
+
+    #region destroy
+    protected void OnDestroy()
+    {
+        if (enemyPool != null)
+        {
+            enemyPool = null;
+        }
+
+        if (enemyBulletPool != null)
+        {
+            enemyBulletPool = null;
+        }
+
+        StopAllCoroutines();
     }
     #endregion
 }

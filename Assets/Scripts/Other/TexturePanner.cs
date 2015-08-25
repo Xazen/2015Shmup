@@ -2,6 +2,9 @@
 using System;
 using System.Collections;
 
+/// <summary>
+/// Helper class that makes it easier to use it in the inspector
+/// </summary>
 [Serializable]
 class Panner
 {
@@ -9,6 +12,9 @@ class Panner
     public float speedY = 1.0f;
 }
 
+/// <summary>
+/// The texture panner is used to move textures continously
+/// </summary>
 public class TexturePanner : MonoBehaviour 
 {
     [SerializeField]
@@ -18,6 +24,7 @@ public class TexturePanner : MonoBehaviour
     private float offsetX = 0;
     private float offsetY = 0;
 
+    #region setup
     protected void Start()
     {
         // Get the material of the game object
@@ -27,15 +34,20 @@ public class TexturePanner : MonoBehaviour
             material = rend.material;
         }
     }
+    #endregion
 
-	// Update is called once per frame
+    #region action
+    // Update is called once per frame
 	protected void Update () 
     {
+        // Material available?
         if (material != null)
         {
+            // Moves the textures
             offsetX = (offsetX + panner.speedX * Time.deltaTime) % 1.0f;
             offsetY = (offsetY + panner.speedY * Time.deltaTime) % 1.0f;
             material.mainTextureOffset = new Vector2(offsetX, offsetY);
         }
-	}
+    }
+    #endregion
 }

@@ -2,6 +2,9 @@
 using UnityEngine.UI;
 using System.Collections;
 
+/// <summary>
+/// The score controller manages the score of the player
+/// </summary>
 public class ScoreController : MonoBehaviour 
 {
     private static ScoreController _instance;
@@ -43,6 +46,7 @@ public class ScoreController : MonoBehaviour
     }
     #endregion
 
+    #region setup
     protected void Start()
     {
         EnemyController.TriggerEnter += OnCollisionEnterEnemy;
@@ -53,7 +57,9 @@ public class ScoreController : MonoBehaviour
     {
         this.scoreUi = scoreUi;
     }
+    #endregion
 
+    #region event
     public void OnCollisionEnterEnemy(GameObject enemy, Collider col)
     {
         if (col.CompareTag(MainController.Tags.PLAYER_BULLET))
@@ -62,4 +68,20 @@ public class ScoreController : MonoBehaviour
             scoreUi.SetScore(score);
         }
     }
+    #endregion
+
+    #region destroy
+    protected void OnDestroy()
+    {
+        if (scoreUi != null)
+        {
+            scoreUi = null;
+        }
+
+        if (_instance != null)
+        {
+            _instance = null;
+        }
+    }
+    #endregion
 }

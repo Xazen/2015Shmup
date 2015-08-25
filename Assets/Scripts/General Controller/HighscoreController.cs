@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Manages the highscore list
+/// </summary>
 public class HighscoreController : MonoBehaviour
 {
     private static HighscoreController _instance;
@@ -34,6 +37,13 @@ public class HighscoreController : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
+    }
+    #endregion
+
+    #region destroy
+    protected void OnDestroy()
+    {
+        _instance = null;
     }
     #endregion
 }

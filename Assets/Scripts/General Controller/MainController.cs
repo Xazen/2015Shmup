@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// The main controller manages the scenes as well as classes that need to be accessible throughout multiple scenes
+/// </summary>
 public class MainController : MonoBehaviour
 {
     #region constants
@@ -21,8 +24,8 @@ public class MainController : MonoBehaviour
     #endregion
 
     #region further singletons
-    public static HighscoreController highscoreController;
-    public static ScoreController playerScore;
+    public static HighscoreController HighscoreController;
+    public static ScoreController PlayerScore;
     #endregion
 
     #region variables
@@ -69,8 +72,8 @@ public class MainController : MonoBehaviour
         mainController = this;
 
         // Setup further singletons
-        highscoreController = GetComponent<HighscoreController>();
-        playerScore = GetComponent<ScoreController>();
+        HighscoreController = GetComponent<HighscoreController>();
+        PlayerScore = GetComponent<ScoreController>();
 
         // Setup the array of updateDelegates
         updateDelegates = new UpdateDelegate[(int)SceneState.Count];
@@ -99,6 +102,17 @@ public class MainController : MonoBehaviour
                 updateDelegates[i] = null;
             }
             updateDelegates = null;
+        }
+
+        // Clean up custom classes
+        if (HighscoreController != null)
+        {
+            HighscoreController = null;
+        }
+
+        if (PlayerScore != null)
+        {
+            PlayerScore = null;
         }
 
         // Clean up singleton

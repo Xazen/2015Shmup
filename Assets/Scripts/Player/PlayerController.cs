@@ -1,8 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerController : MonoBehaviour 
+/// <summary>
+/// The player controller controls the movement, health and bullets of the player.
+/// </summary>
+public class PlayerController : MonoBehaviour
 {
+    #region variables
     // Input
     [SerializeField]
     private InputController inputController;
@@ -26,7 +30,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private float holdFireRate = 0.3f;
-    
+    #endregion
+
     #region setup
     // Use this for initialization
 	void Start () 
@@ -128,14 +133,18 @@ public class PlayerController : MonoBehaviour
     #region gameplay events
     public void OnBulletBecameInvisible(GameObject bullet)
     {
-        bulletPool.ReturnGameObject(bullet);
+        // The pool might had been destroyed by switching the scene
+        if (bulletPool != null)
+        {
+            bulletPool.ReturnGameObject(bullet);
+        }
     }
 
     public void OnBulletCollision(GameObject bullet, Collider col)
     {
         // Player bullet hitted the enemy?
         if (col.CompareTag(MainController.Tags.ENEMY) &&
-            bullet.CompareTag(MainController.Tags.PLAYER))
+            bullet.CompareTag(MainController.Tags.PLAYER_BULLET))
         {
             // Remove the player bullet
             bulletPool.ReturnGameObject(bullet);
@@ -214,6 +223,31 @@ public class PlayerController : MonoBehaviour
     {
         mouseTargetPosition = newPosition;
         moveDirection = (newPosition-this.transform.position).normalized;
+    }
+    #endregion
+
+    #region destroy
+    protected void OnDestroy()
+    {
+        if (inputController != null)
+        {
+            inputController = null;
+        }
+
+        if (playerHealth != null)
+        {
+            playerHealth = null;
+        }
+
+        if (playerRigidbody != null)
+        {
+            playerRigidbody = null;
+        }
+
+        if (bulletPool != null)
+        {
+            bulletPool = null;
+        }
     }
     #endregion
 }

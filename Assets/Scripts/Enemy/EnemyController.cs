@@ -4,8 +4,18 @@ using System.Collections;
 /// <summary>
 /// The enemey class manages the enemy move and fire behavior
 /// </summary>
-public class EnemyController : MonoBehaviour 
+public class EnemyController : MonoBehaviour
 {
+    #region variables
+    // Movement
+    [SerializeField]
+    private float speed = 10.0f;
+    [SerializeField]
+    private float fireRate = 1.0f;
+    [SerializeField]
+    private float firstFireDelay = 0.5f;
+
+    // Spawn location
     public enum SpawnPosition
     {
         Top,
@@ -14,17 +24,11 @@ public class EnemyController : MonoBehaviour
         Right,
         Count
     }
-
-    [SerializeField]
-    private float speed = 10.0f;
-    [SerializeField]
-    private float fireRate = 1.0f;
-    [SerializeField]
-    private float firstFireDelay = 0.5f;
-
+    
     [HideInInspector]
     public SpawnPosition spawnPosition = SpawnPosition.Top;
 
+    // Public variable
     public int scoreValue = 100;
     public int collisionDamage = 1;
 
@@ -38,7 +42,9 @@ public class EnemyController : MonoBehaviour
 
     public delegate GameObject EnemyBulletDelegate(GameObject enemy);
     public static event EnemyBulletDelegate BulletOfEnemy;
+    #endregion
 
+    #region setup
     private void Update()
     {
         // Stop firing when the enemy become out of the game area
@@ -48,31 +54,17 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Based on the spawn position the method will return true when the enemy is at the border 
-    /// of the game area
-    /// </summary>
-    /// <returns>Return true when the enemy is at the border. False otherwise</returns>
-    private bool WillBecomeInvisible()
+    void OnEnable()
     {
-        Border gameArea = GameController.instance.gameArea;
-        Vector3 enemySize = GetComponent<Collider>().bounds.size;
+        // Set velocity when the object is enabled
+        GetComponent<Rigidbody>().velocity = Vector3.forward * speed;
 
-        if ((transform.position.x + enemySize.x / 2 > gameArea.right &&
-            spawnPosition == SpawnPosition.Left) ||
-            (transform.position.x - enemySize.x / 2 < gameArea.left &&
-            spawnPosition == SpawnPosition.Right) ||
-            (transform.position.z - enemySize.z / 2 < gameArea.bottom &&
-            spawnPosition == SpawnPosition.Top) ||
-            (transform.position.z + enemySize.z / 2 > gameArea.top &&
-            spawnPosition == SpawnPosition.Bottom))
-        {
-            return true;
-        }
-
-        return false;
+        // Start firing
+        StartCoroutine("Fire");
     }
+    #endregion
 
+    #region actions
     /// <summary>
     /// Start firing bullets
     /// </summary>
@@ -108,16 +100,36 @@ public class EnemyController : MonoBehaviour
             }
         }
     }
-
-	void OnEnable() 
+    #endregion
+   
+    #region helper
+    /// <summary>
+    /// Based on the spawn position the method will return true when the enemy is at the border 
+    /// of the game area
+    /// </summary>
+    /// <returns>Return true when the enemy is at the border. False otherwise</returns>
+    private bool WillBecomeInvisible()
     {
-        // Set velocity when the object is enabled
-        GetComponent<Rigidbody>().velocity = Vector3.forward * speed;
-        
-        // Start firing
-        StartCoroutine("Fire");
-	}
-	
+        Border gameArea = GameController.instance.gameArea;
+        Vector3 enemySize = GetComponent<Collider>().bounds.size;
+
+        if ((transform.position.x + enemySize.x / 2 > gameArea.right &&
+            spawnPosition == SpawnPosition.Left) ||
+            (transform.position.x - enemySize.x / 2 < gameArea.left &&
+            spawnPosition == SpawnPosition.Right) ||
+            (transform.position.z - enemySize.z / 2 < gameArea.bottom &&
+            spawnPosition == SpawnPosition.Top) ||
+            (transform.position.z + enemySize.z / 2 > gameArea.top &&
+            spawnPosition == SpawnPosition.Bottom))
+        {
+            return true;
+        }
+
+        return false;
+    }
+    #endregion
+
+    #region events
     void OnBecameInvisible()
     {      
         // Send became invisible event
@@ -141,10 +153,31 @@ public class EnemyController : MonoBehaviour
             EnemyDied(this.gameObject);
         }
     }
+    #endregion
 
+    #region destroy
     protected void OnDestroy()
     {
-        BulletOfEnemy = null;
+        if (BecameInvisible != null)
+        {
+            BecameInvisible = null;
+        }
+
+        if (EnemyDied != null)
+        {
+            EnemyDied = null;
+        }
+        
+        if (TriggerEnter != null)
+        {
+            TriggerEnter = null;
+        }
+
+        if (BulletOfEnemy != null)
+        {
+            BulletOfEnemy = null;
+        }
         StopAllCoroutines();
     }
+    #endregion
 }
