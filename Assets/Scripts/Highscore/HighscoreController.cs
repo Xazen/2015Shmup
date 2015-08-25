@@ -42,11 +42,13 @@ public class HighscoreController : MonoBehaviour
         if (highscoreEntries == null)
         {
             highscoreEntries = new List<HighscoreEntry>();
-            for (int i = 1; i <= 10; i++)
+            for (int i = 10; i > 0; i--)
             {
-                highscoreEntries.Add(new HighscoreEntry("Nummer " + i, 500 * i));
+                highscoreEntries.Add(new HighscoreEntry("Mr or Mrs " + i, 500 * i));
             }
         }
+
+        Print();
     }
     #endregion
 
@@ -58,10 +60,39 @@ public class HighscoreController : MonoBehaviour
     /// <param name="score">The score the player achieved</param>
     public void AddHighscoreEntry(string name, int score)
     {
-        HighscoreEntry highscoreEntry = new HighscoreEntry(name, score);
-        highscoreEntries.Add(highscoreEntry);
-        highscoreEntries = highscoreEntries.OrderBy(o => o.Score).ToList();
-        this.Save();
+        // Is score high enough?
+        if (IsValid(score))
+        {
+            // Create high score entry
+            HighscoreEntry highscoreEntry = new HighscoreEntry(name, score);
+
+            // Add to high score
+            highscoreEntries.Add(highscoreEntry);
+
+            // Order high score entries
+            highscoreEntries = highscoreEntries.OrderByDescending(o => o.Score).ToList();
+
+            // Delete the last entry with the lowest score
+            highscoreEntries.RemoveAt(highscoreEntries.Count - 1);
+
+            // Save the new high score list
+            this.Save();
+        }
+    }
+
+    /// <summary>
+    /// Check if the score is high enough to be on the top 10
+    /// </summary>
+    /// <param name="score">The score to check against</param>
+    /// <returns></returns>
+    public bool IsValid(int score)
+    {
+        if (score > highscoreEntries[highscoreEntries.Count-1].Score)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     /// <summary>

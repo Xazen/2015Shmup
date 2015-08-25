@@ -10,9 +10,9 @@ public class ScoreController : MonoBehaviour
     private static ScoreController _instance;
     
     [HideInInspector]
-    public ScoreUI scoreUi;
+    public ScoreUI inGameScoreUi;
 
-    private int score = 0;
+    public int score = 0;
 
     #region Singleton
     public static ScoreController instance
@@ -55,7 +55,7 @@ public class ScoreController : MonoBehaviour
 	// Use this for initialization
 	public void Initialize(ScoreUI scoreUi)
     {
-        this.scoreUi = scoreUi;
+        this.inGameScoreUi = scoreUi;
     }
     #endregion
 
@@ -65,7 +65,7 @@ public class ScoreController : MonoBehaviour
         if (col.CompareTag(MainController.Tags.PLAYER_BULLET))
         {
             score += enemy.GetComponent<EnemyController>().scoreValue;
-            scoreUi.SetScore(score);
+            inGameScoreUi.SetScore(score);
         }
     }
     #endregion
@@ -73,9 +73,9 @@ public class ScoreController : MonoBehaviour
     #region destroy
     protected void OnDestroy()
     {
-        if (scoreUi != null)
+        if (inGameScoreUi != null)
         {
-            scoreUi = null;
+            inGameScoreUi = null;
         }
 
         if (_instance != null)

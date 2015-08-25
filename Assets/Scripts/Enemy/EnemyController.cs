@@ -84,7 +84,6 @@ public class EnemyController : MonoBehaviour
             GameObject bullet = BulletOfEnemy(this.gameObject);
 
             // Bullet positioning
-            Vector3 enemySize = GetComponent<Collider>().bounds.size;
             bullet.transform.position = this.transform.position;
 
             // Position the bullet in front of the enemy so that it become visible
