@@ -16,13 +16,15 @@ public class EnemyBullet : Bullet
 
     protected void Start()
     {
-        target = GameController.instance.player;
+        //Debug.Log("target start: " + GameController.instance.player);
+        //target = GameController.instance.player;
     }
 
     protected void OnEnable()
     {
+        //Debug.Log("target: " + target);
         //moveDirection = (target.transform.position - this.transform.position).normalized;
 
-        //this.GetComponent<Rigidbody>().velocity = moveDirection * speed;
+        this.GetComponent<Rigidbody>().SetVelocityZ(-speed);
     }
 }
