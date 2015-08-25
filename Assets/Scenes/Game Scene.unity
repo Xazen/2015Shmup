@@ -93,6 +93,10 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 516973558}
   m_Script: {fileID: 11500000, guid: 388d7c865ac2962429eb73a4e7aefc7d, type: 3}
+--- !u!1 &242254562 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 187510, guid: 8c76cddd31eb379449911ea7cfa457fa, type: 2}
+  m_PrefabInternal: {fileID: 432057596}
 --- !u!1 &260053829
 GameObject:
   m_ObjectHideFlags: 0
@@ -261,26 +265,18 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 11481410, guid: 8c76cddd31eb379449911ea7cfa457fa, type: 2}
-      propertyPath: healthUI
-      value: 
-      objectReference: {fileID: 1298200406}
-    - target: {fileID: 11415724, guid: 8c76cddd31eb379449911ea7cfa457fa, type: 2}
-      propertyPath: scoreUi
-      value: 
-      objectReference: {fileID: 671033540}
-    - target: {fileID: 6597672, guid: 8c76cddd31eb379449911ea7cfa457fa, type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6597672, guid: 8c76cddd31eb379449911ea7cfa457fa, type: 2}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 11475696, guid: 8c76cddd31eb379449911ea7cfa457fa, type: 2}
       propertyPath: inputController
       value: 
       objectReference: {fileID: 19519574}
+    - target: {fileID: 11415724, guid: 8c76cddd31eb379449911ea7cfa457fa, type: 2}
+      propertyPath: scoreUi
+      value: 
+      objectReference: {fileID: 671033540}
+    - target: {fileID: 11481410, guid: 8c76cddd31eb379449911ea7cfa457fa, type: 2}
+      propertyPath: healthUI
+      value: 
+      objectReference: {fileID: 1298200406}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8c76cddd31eb379449911ea7cfa457fa, type: 2}
   m_IsPrefabParent: 0
@@ -390,6 +386,18 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11457508, guid: bf7963c896843774e8e8ff1df10a54ce, type: 2}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 242254562}
+    - target: {fileID: 11493046, guid: bf7963c896843774e8e8ff1df10a54ce, type: 2}
+      propertyPath: inputType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11477002, guid: bf7963c896843774e8e8ff1df10a54ce, type: 2}
+      propertyPath: pooledGameObject
+      value: 
+      objectReference: {fileID: 153430, guid: 8d5a98fb9135d9a439812f5b882259a8, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bf7963c896843774e8e8ff1df10a54ce, type: 2}
   m_IsPrefabParent: 0

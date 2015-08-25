@@ -12,7 +12,6 @@ GameObject:
   - 54: {fileID: 5462108}
   - 65: {fileID: 6588042}
   - 23: {fileID: 2377922}
-  - 114: {fileID: 11409196}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -144,19 +143,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: .800000012, y: .25, z: 1}
   m_Center: {x: 0, y: .125, z: .100000001}
---- !u!114 &11409196
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 141826}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd2b90bea1f2e2b49a93d4779cba5b4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pooledGameObject: {fileID: 153430, guid: 8d5a98fb9135d9a439812f5b882259a8, type: 2}
-  poolCount: 5
 --- !u!114 &11496362
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -169,8 +155,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: -3
-  bulletPool: {fileID: 0}
   fireRate: 3
+  firstFireDelay: .5
+  spawnPosition: 0
   scoreValue: 100
   collisionDamage: 1
 --- !u!1001 &100100000
@@ -215,10 +202,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: EnemyBullet
       value: 
-      objectReference: {fileID: 11409196}
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: poolCount
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: bulletPool
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

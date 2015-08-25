@@ -140,7 +140,8 @@ public class PlayerController : MonoBehaviour
 
     public void OnBulletCollision(GameObject bullet, Collider col)
     {
-        if (col.CompareTag(MainController.Tags.ENEMY))
+        if (col.CompareTag(MainController.Tags.ENEMY) &&
+            bullet.CompareTag(MainController.Tags.PLAYER))
         {
             bulletPool.ReturnGameObject(bullet);
         }

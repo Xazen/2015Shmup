@@ -26,7 +26,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 409122}
   - 114: {fileID: 11412366}
-  - 114: {fileID: 11420644}
+  - 114: {fileID: 11470136}
+  - 114: {fileID: 11477002}
   m_Layer: 0
   m_Name: SpawnController
   m_TagString: Untagged
@@ -70,9 +71,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 927c2f6a859883d4286c088efeef13d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPool: {fileID: 11420644}
   spawnRate: 3
---- !u!114 &11420644
+--- !u!114 &11457508
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 175476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b50c6f45125abbc4ea3daaa9d79a5962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputController: {fileID: 11493046}
+  player: {fileID: 0}
+  gameArea:
+    top: 0
+    left: 0
+    bottom: 0
+    right: 0
+--- !u!114 &11470136
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -85,17 +103,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pooledGameObject: {fileID: 141826, guid: b274ca2adc5158648ae19c7ee0af5de1, type: 2}
   poolCount: 20
---- !u!114 &11457508
+--- !u!114 &11477002
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 175476}
+  m_GameObject: {fileID: 192100}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b50c6f45125abbc4ea3daaa9d79a5962, type: 3}
+  m_Script: {fileID: 11500000, guid: dd2b90bea1f2e2b49a93d4779cba5b4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pooledGameObject: {fileID: 153430, guid: 8d5a98fb9135d9a439812f5b882259a8, type: 2}
+  poolCount: 40
 --- !u!114 &11493046
 MonoBehaviour:
   m_ObjectHideFlags: 1

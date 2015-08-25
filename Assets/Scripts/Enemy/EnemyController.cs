@@ -96,7 +96,7 @@ public class EnemyController : MonoBehaviour
             bullet.transform.position = this.transform.position;
 
             // Position the bullet in front of the enemy so that it become visible
-            bullet.transform.SetPositionZ(bullet.transform.position.z - enemySize.z/2);
+            bullet.transform.SetPositionZ(bullet.transform.position.z);
 
             // Make sure the rotation is the same as the enemy rotation
             bullet.transform.rotation = this.transform.rotation;

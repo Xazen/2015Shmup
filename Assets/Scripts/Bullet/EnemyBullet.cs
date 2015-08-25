@@ -9,22 +9,33 @@ public class EnemyBullet : Bullet
     // Movement
     [SerializeField]
     private float speed = 6.0f;
+    [SerializeField]
+    private float delay = 0.3f;
+
     private Vector3 moveDirection;
-    
+
     // Target
     private GameObject target;
 
-    protected void Start()
+    protected void Awake()
     {
-        //Debug.Log("target start: " + GameController.instance.player);
-        //target = GameController.instance.player;
+        target = GameController.instance.player;
     }
 
     protected void OnEnable()
     {
-        //Debug.Log("target: " + target);
-        //moveDirection = (target.transform.position - this.transform.position).normalized;
+        this.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        StartCoroutine(TargetedFire());
+    }
 
-        this.GetComponent<Rigidbody>().SetVelocityZ(-speed);
+    private IEnumerator TargetedFire()
+    {
+        for (float timer = 0.0f; timer <= delay; timer += Time.deltaTime)
+        {
+            yield return 0;
+        }
+
+        moveDirection = (target.transform.position - this.transform.position).normalized;
+        this.GetComponent<Rigidbody>().velocity = moveDirection * speed;
     }
 }
