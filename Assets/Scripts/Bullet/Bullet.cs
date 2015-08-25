@@ -1,23 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerBullet : MonoBehaviour 
+public abstract class Bullet : MonoBehaviour 
 {
-    [SerializeField]
-    private float speed = 20.0f;
-
     // A event to notify other classes that it became invisible
     public delegate void BulletDelegate(GameObject bullet);
     public static event BulletDelegate BecameInvisibleEvent;
 
     public delegate void BulletTriggerDelegate(GameObject bullet, Collider col);
     public static event BulletTriggerDelegate TriggerEvent;
-
-	protected void OnEnable() 
-    {
-        // Set speed of the bullet
-        GetComponent<Rigidbody>().SetVelocityZ(speed);
-	}
 
     #region delegate methods
     /// <summary>

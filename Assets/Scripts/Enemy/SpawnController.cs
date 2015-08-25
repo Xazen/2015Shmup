@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
-using System;
 using System.Collections;
 
 public class SpawnController : MonoBehaviour 
 {
-    [SerializeField]
     private ObjectPool enemyPool;
+    private ObjectPool enemyBulletPool;
+
     [SerializeField]
     private float spawnRate = 3.0f;
     private Border gameArea;
@@ -13,11 +13,27 @@ public class SpawnController : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
+        // Get object pool
+        ObjectPool[] objectPools = this.GetComponents<ObjectPool>();
+        for(int i = 0; i < objectPools.Length; i++)
+        {
+            if (objectPools[i].pooledGameObject.CompareTag(MainController.Tags.ENEMY))
+            {
+                enemyPool = objectPools[i];
+            }
+            else if (objectPools[i].pooledGameObject.CompareTag(MainController.Tags.ENEMY_BULLET))
+            {
+                enemyBulletPool = objectPools[i];
+            }
+        }
+        enemyPool.Initialize();
+        enemyBulletPool.Initialize();
+
         // Setup event
         EnemyController.BecameInvisible += OnEnemyBecamInvisible;
         EnemyController.TriggerEnter += OnCollisionEnterEnemy;
 
-        gameArea = GameController.GameArea;
+        gameArea = GameController.instance.gameArea;
 
         // Spawn enemies
         StartCoroutine("SpawnEnemies");
@@ -55,7 +71,7 @@ public class SpawnController : MonoBehaviour
 
     public void OnCollisionEnterEnemy(GameObject enemy, Collider col)
     {
-        if (col.CompareTag(MainController.Tags.BULLET))
+        if (col.CompareTag(MainController.Tags.PLAYER_BULLET))
         {
             enemyPool.ReturnGameObject(enemy);
         }

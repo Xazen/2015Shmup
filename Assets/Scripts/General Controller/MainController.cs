@@ -14,7 +14,8 @@ public class MainController : MonoBehaviour
     {
         public static readonly string PLAYER = "Player";
         public static readonly string ENEMY = "Enemy";
-        public static readonly string BULLET = "Bullet";
+        public static readonly string PLAYER_BULLET = "Player Bullet";
+        public static readonly string ENEMY_BULLET = "Enemy Bullet";
     }
     #endregion
 

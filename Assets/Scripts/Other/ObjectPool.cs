@@ -1,18 +1,30 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
 public class ObjectPool : MonoBehaviour 
 {
-    [SerializeField]
-    private GameObject pooledGameObject;
+    public GameObject pooledGameObject;
 
     [SerializeField]
-    private int poolCount = 20;
+    private int poolCount;
 
     private List<GameObject> gameObjectList;
     
     protected void Start()
+    {
+        // Check if the required values are set
+        if (pooledGameObject != null)
+        {
+            Initialize();
+        }
+    }
+
+    /// <summary>
+    /// Initialize the actual object pool
+    /// </summary>
+    public void Initialize()
     {
         // Create an empty game object as a folder
         GameObject parentGameObject = new GameObject();

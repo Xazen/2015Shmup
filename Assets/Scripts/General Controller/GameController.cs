@@ -35,23 +35,59 @@ public struct Border
 
 public class GameController : MonoBehaviour 
 {
-    public static InputController InputController;
-    public static Border GameArea;
+    public InputController inputController;
+    public GameObject player;
+    public Border gameArea;
+
+    private static GameController _instance;
 
     private float pausedTimeScale;
+
+    #region Singleton
+    public static GameController instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = GameObject.FindObjectOfType<GameController>();
+            }
+
+            return _instance;
+        }
+    }
+
+    void Awake()
+    {
+        if (_instance == null)
+        {
+            // Make it a Singleton if this is the first instance
+            _instance = this;
+            DontDestroyOnLoad(this);
+        }
+        else
+        {
+            // In case there is another instance, destroy it
+            if (this != _instance)
+            {
+                Destroy(this.gameObject);
+            }
+        }
+    }
+    #endregion
 
 	// Use this for initialization
 	void Start () 
     {
         // Setup variables
-        InputController = GetComponent<InputController>();
+        inputController = GetComponent<InputController>();
 
         // Get reference points to setup game area
         Vector3 lowerLeft = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, Camera.main.transform.position.y));
         Vector3 upperRight = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.y));
 
         // Setup game area
-        GameArea = new Border(
+        gameArea = new Border(
             upperRight.z,
             lowerLeft.x,
             lowerLeft.z,

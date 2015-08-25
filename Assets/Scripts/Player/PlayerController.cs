@@ -3,6 +3,10 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour 
 {
+    // Input
+    [SerializeField]
+    private InputController inputController;
+
     // Health
     [SerializeField]
     private PlayerHealth playerHealth;
@@ -33,21 +37,22 @@ public class PlayerController : MonoBehaviour
     {
         playerRigidbody = GetComponent<Rigidbody>();
 
-        // Setup keyboard control
-        keyboardControl = GameController.InputController.keyboardKeyCodes;
-
         // Setup player health event
         playerHealth.healthDepletedEvent += OnHealthDepleted;
 
         // Setup bullet event
         PlayerBullet.BecameInvisibleEvent += OnBulletBecameInvisible;
         PlayerBullet.TriggerEvent += OnBulletCollision;
+        
+        // Setup keyboard control
+        InputController inputController = GameController.instance.inputController;
+        keyboardControl = inputController.keyboardKeyCodes;
 
         // Setup input delegates
-        GameController.InputController.keyDownDelegate += OnKeyDown;
-        GameController.InputController.keyHoldDelegate += OnKeyHold;
-        GameController.InputController.keyUpDelegate += OnKeyUp;
-        GameController.InputController.mousePositionChangedDelegate += OnMousePositionChanged;
+        inputController.keyDownDelegate += OnKeyDown;
+        inputController.keyHoldDelegate += OnKeyHold;
+        inputController.keyUpDelegate += OnKeyUp;
+        inputController.mousePositionChangedDelegate += OnMousePositionChanged;
 	}
     #endregion
 
@@ -61,7 +66,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Keep the player inside the game area
-        Border gameArea = GameController.GameArea;
+        Border gameArea = GameController.instance.gameArea;
         Vector3 playerSize = GetComponent<Collider>().bounds.size;
         if (transform.position.x + playerSize.x / 2 > gameArea.right)
         {

@@ -23,7 +23,7 @@ public class PlayerScore : MonoBehaviour
 
     public void OnCollisionEnterEnemy(GameObject enemy, Collider col)
     {
-        if (col.CompareTag(MainController.Tags.BULLET))
+        if (col.CompareTag(MainController.Tags.PLAYER_BULLET))
         {
             score += enemy.GetComponent<EnemyController>().scoreValue;
             scoreUi.SetScore(score);
