@@ -65,11 +65,18 @@ public class MainController : MonoBehaviour
     #region Unity methods
     protected void Awake()
     {
-        // Keep this gameobject alive
-        Object.DontDestroyOnLoad(gameObject);
 
         // Setup singleton
-        mainController = this;
+        if (mainController == null)
+        {
+            // Keep this gameobject alive
+            Object.DontDestroyOnLoad(gameObject);
+            mainController = this;
+        }
+        else if (mainController != this)
+        {
+            Destroy(gameObject);
+        }
 
         // Setup further singletons
         HighscoreController = GetComponent<HighscoreController>();
