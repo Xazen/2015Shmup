@@ -8,11 +8,7 @@ public class PlayerController : MonoBehaviour
     private InputController inputController;
 
     // Health
-    [SerializeField]
-    private PlayerHealth playerHealth;
-
-    public delegate void PlayerTriggerDelegate(GameObject player, Collider col);
-    public event PlayerTriggerDelegate triggerEvent;
+    public PlayerHealth playerHealth;
 
     // Movement
     [SerializeField]
@@ -36,9 +32,6 @@ public class PlayerController : MonoBehaviour
 	void Start () 
     {
         playerRigidbody = GetComponent<Rigidbody>();
-
-        // Setup player health event
-        playerHealth.healthDepletedEvent += OnHealthDepleted;
 
         // Setup bullet event
         PlayerBullet.BecameInvisibleEvent += OnBulletBecameInvisible;
@@ -113,26 +106,26 @@ public class PlayerController : MonoBehaviour
     #region collision
     public void OnTriggerEnter(Collider col)
     {
-        // Call event
-        if (triggerEvent != null)
-        {
-            triggerEvent(this.gameObject, col);
-        }
-
-        // Reduce health
+        // Collided with enemy?
+        int damage = 0;
         if (col.CompareTag(MainController.Tags.ENEMY))
         {
-            playerHealth.DecreaseLife(col.gameObject.GetComponent<EnemyController>().collisionDamage);
+            // Reduce health
+            damage = col.gameObject.GetComponent<EnemyController>().collisionDamage;
+            playerHealth.DecreaseLife(damage);
         }
+
+        // Collided with enemy bullet?
+        if (col.CompareTag(MainController.Tags.ENEMY_BULLET))
+        {
+            // Reduce health
+            damage = col.gameObject.GetComponent<EnemyBullet>().damage;
+        }
+        playerHealth.DecreaseLife(damage);
     }
     #endregion
 
     #region gameplay events
-    public void OnHealthDepleted()
-    {
-        //TODO Show gameover
-    }
-
     public void OnBulletBecameInvisible(GameObject bullet)
     {
         bulletPool.ReturnGameObject(bullet);
@@ -140,9 +133,11 @@ public class PlayerController : MonoBehaviour
 
     public void OnBulletCollision(GameObject bullet, Collider col)
     {
+        // Player bullet hitted the enemy?
         if (col.CompareTag(MainController.Tags.ENEMY) &&
             bullet.CompareTag(MainController.Tags.PLAYER))
         {
+            // Remove the player bullet
             bulletPool.ReturnGameObject(bullet);
         }
     }

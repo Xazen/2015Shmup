@@ -97,6 +97,7 @@ GameObject:
   - 4: {fileID: 597433712}
   - 114: {fileID: 597433713}
   - 114: {fileID: 597433714}
+  - 114: {fileID: 597433715}
   m_Layer: 0
   m_Name: Main Controller
   m_TagString: Untagged
@@ -138,3 +139,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eee87767a57de94e989d6f5fcdb2233, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &597433715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 597433711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3094dc61f264de84e81de5d2b7ea5456, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreUi: {fileID: 0}

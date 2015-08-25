@@ -8,6 +8,7 @@ public class MainController : MonoBehaviour
     {
         public static readonly string MENU_SCENE = "Menu Scene";
         public static readonly string GAME_SCENE = "Game Scene";
+        public static readonly string GAME_OVER_SCENE = "Game Over Scene";
     }
 
     public static class Tags
@@ -20,7 +21,8 @@ public class MainController : MonoBehaviour
     #endregion
 
     #region further singletons
-    HighscoreController highscoreController;
+    public static HighscoreController highscoreController;
+    public static ScoreController playerScore;
     #endregion
 
     #region variables
@@ -68,6 +70,7 @@ public class MainController : MonoBehaviour
 
         // Setup further singletons
         highscoreController = GetComponent<HighscoreController>();
+        playerScore = GetComponent<ScoreController>();
 
         // Setup the array of updateDelegates
         updateDelegates = new UpdateDelegate[(int)SceneState.Count];
@@ -82,7 +85,7 @@ public class MainController : MonoBehaviour
         updateDelegates[(int)SceneState.Run] = UpdateSceneRun;
 
         // Switch to menu
-        nextSceneName = SceneNames.MENU_SCENE;
+        nextSceneName = MainController.SceneNames.MENU_SCENE;
         sceneState = SceneState.Reset;
     }
 

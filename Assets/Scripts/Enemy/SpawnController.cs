@@ -58,6 +58,13 @@ public class SpawnController : MonoBehaviour
     }
     #endregion
 
+    #region destroy
+    protected void OnDestroy()
+    {
+        StopAllCoroutines();
+    }
+    #endregion
+
     #region action
     /// <summary>
     /// Start spawning enemies

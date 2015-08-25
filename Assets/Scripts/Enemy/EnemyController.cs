@@ -141,4 +141,10 @@ public class EnemyController : MonoBehaviour
             EnemyDied(this.gameObject);
         }
     }
+
+    protected void OnDestroy()
+    {
+        BulletOfEnemy = null;
+        StopAllCoroutines();
+    }
 }

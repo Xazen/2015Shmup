@@ -25,7 +25,6 @@ public class HighscoreController : MonoBehaviour
         {
             // Make it a Singleton if this is the first instance
             _instance = this;
-            DontDestroyOnLoad(this);
         }
         else
         {

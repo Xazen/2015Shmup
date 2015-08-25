@@ -63,7 +63,6 @@ public class GameController : MonoBehaviour
         {
             // Make it a Singleton if this is the first instance
             _instance = this;
-            DontDestroyOnLoad(this);
         }
         else
         {
@@ -79,6 +78,12 @@ public class GameController : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
+        // Setup player health delegate
+        player.GetComponent<PlayerHealth>().healthDepletedEvent += OnHealthDepleted;
+
+        // Setup UI for player score
+        MainController.playerScore.Initialize(GameObject.FindObjectOfType<ScoreUI>());
+
         // Setup variables
         inputController = GetComponent<InputController>();
 
@@ -103,6 +108,7 @@ public class GameController : MonoBehaviour
         }
     }
 
+    #region actions
     /// <summary>
     /// Pause and resume the game
     /// </summary>
@@ -143,14 +149,14 @@ public class GameController : MonoBehaviour
     /// </summary>
     public void ShowGameOver()
     {
-        Pause();
+        MainController.SwitchScene(MainController.SceneNames.GAME_OVER_SCENE);
     }
+    #endregion
 
-    /// <summary>
-    /// Hide game over screen
-    /// </summary>
-    public void HideGameOver()
+    #region events
+    public void OnHealthDepleted()
     {
-        Unpause();
+        ShowGameOver();
     }
+    #endregion
 }

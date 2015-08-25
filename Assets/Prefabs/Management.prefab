@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 388d7c865ac2962429eb73a4e7aefc7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputType: 1
+  inputType: 0
   keyboardKeyCodes:
     up: 273
     left: 276
