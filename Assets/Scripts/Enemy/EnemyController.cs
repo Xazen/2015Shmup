@@ -15,6 +15,8 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private float firstFireDelay = 0.5f;
 
+    private Vector3 moveDirection = Vector3.zero;
+
     // Spawn location
     public enum SpawnPosition
     {
@@ -56,8 +58,6 @@ public class EnemyController : MonoBehaviour
 
     void OnEnable()
     {
-        // Set velocity when the object is enabled
-        GetComponent<Rigidbody>().velocity = Vector3.forward * speed;
 
         // Start firing
         StartCoroutine("Fire");
@@ -65,6 +65,28 @@ public class EnemyController : MonoBehaviour
     #endregion
 
     #region actions
+    public void CalculateMoveDirection()
+    {
+        // Set velocity when the object is enabled
+        switch (spawnPosition)
+        {
+            case SpawnPosition.Left:
+                moveDirection = Vector3.left;
+                break;
+            case SpawnPosition.Bottom:
+                moveDirection = Vector3.back;
+                break;
+            case SpawnPosition.Right:
+                moveDirection = Vector3.right;
+                break;
+            case SpawnPosition.Top:
+            default:
+                moveDirection = Vector3.forward;
+                break;
+        }
+        GetComponent<Rigidbody>().velocity = moveDirection * speed;
+    }
+
     /// <summary>
     /// Start firing bullets
     /// </summary>

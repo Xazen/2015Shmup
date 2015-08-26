@@ -71,11 +71,45 @@ public class SpawnController : MonoBehaviour
 
             // Setup position
             Vector3 enemyColliderSize = enemy.GetComponent<Collider>().bounds.size;
-            Vector3 enemyPosition = new Vector3(
-                UnityEngine.Random.Range(gameArea.left+enemyColliderSize.x/2, gameArea.right-enemyColliderSize.x/2),
-                0,
-                gameArea.top + enemyColliderSize.z);
 
+            // Set general spawn position randomly
+            EnemyController.SpawnPosition spawnPosition = (EnemyController.SpawnPosition) UnityEngine.Random.Range(0, (int) EnemyController.SpawnPosition.Count);
+
+            // Set spawn position and calculate movement direction
+            EnemyController enemyController = enemy.GetComponent<EnemyController>();
+            enemyController.spawnPosition = spawnPosition;
+            enemyController.CalculateMoveDirection();
+
+            // Set precise enemy position
+            Vector3 enemyPosition = Vector3.zero;
+            switch (spawnPosition)
+            {
+                case EnemyController.SpawnPosition.Left:
+                    enemyPosition = new Vector3(
+                        gameArea.left - enemyColliderSize.z,
+                        0,
+                        UnityEngine.Random.Range(gameArea.top - enemyColliderSize.z / 2, gameArea.bottom + 2 * enemyColliderSize.z));
+                    break;
+                case EnemyController.SpawnPosition.Bottom:
+                    enemyPosition = new Vector3(
+                        UnityEngine.Random.Range(gameArea.left + enemyColliderSize.x / 2, gameArea.right - enemyColliderSize.x / 2),
+                        0,
+                        gameArea.bottom - enemyColliderSize.z);
+                    break;
+                case EnemyController.SpawnPosition.Right:
+                    enemyPosition = new Vector3(
+                        gameArea.right + enemyColliderSize.z,
+                        0,
+                        UnityEngine.Random.Range(gameArea.top - enemyColliderSize.z / 2, gameArea.bottom + 2 * enemyColliderSize.z));
+                    break;
+                case EnemyController.SpawnPosition.Top:
+                default:
+                    enemyPosition = new Vector3(
+                        UnityEngine.Random.Range(gameArea.left + enemyColliderSize.x / 2, gameArea.right - enemyColliderSize.x / 2),
+                        0,
+                        gameArea.top + enemyColliderSize.z);
+                    break;
+            }
             enemy.transform.position = enemyPosition;
 
             // Wait for spawn rate

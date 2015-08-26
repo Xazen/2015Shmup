@@ -47,15 +47,11 @@ public class ScoreController : MonoBehaviour
     #endregion
 
     #region setup
-    protected void Start()
-    {
-        EnemyController.TriggerEnter += OnCollisionEnterEnemy;
-    }   
-
 	// Use this for initialization
 	public void Initialize(ScoreUI scoreUi)
     {
         this.inGameScoreUi = scoreUi;
+        EnemyController.TriggerEnter += OnCollisionEnterEnemy;
     }
     #endregion
 
