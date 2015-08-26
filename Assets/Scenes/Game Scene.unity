@@ -530,6 +530,10 @@ Prefab:
       propertyPath: ScoreUI
       value: 
       objectReference: {fileID: 671033542}
+    - target: {fileID: 11475696, guid: 8c76cddd31eb379449911ea7cfa457fa, type: 2}
+      propertyPath: speed
+      value: 7.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8c76cddd31eb379449911ea7cfa457fa, type: 2}
   m_IsPrefabParent: 0
@@ -648,12 +652,16 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11412366, guid: bf7963c896843774e8e8ff1df10a54ce, type: 2}
       propertyPath: spawnRate
-      value: 3
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 11457508, guid: bf7963c896843774e8e8ff1df10a54ce, type: 2}
       propertyPath: pauseScreen
       value: 
       objectReference: {fileID: 1906620965}
+    - target: {fileID: 11412366, guid: bf7963c896843774e8e8ff1df10a54ce, type: 2}
+      propertyPath: spawnMulitplier
+      value: .970000029
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bf7963c896843774e8e8ff1df10a54ce, type: 2}
   m_IsPrefabParent: 0
@@ -2283,7 +2291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: .02079105, g: .602941155, b: 0, a: 1}
+  m_Color: {r: .509803951, g: .70588237, b: .97647059, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: d24cad22434350b4aa407fe460c8fe1a, type: 3}
     m_FontSize: 42

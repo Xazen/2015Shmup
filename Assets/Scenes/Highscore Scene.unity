@@ -291,7 +291,7 @@ MonoBehaviour:
   m_Script: {fileID: -619905303, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 793066237}
   m_sendNavigationEvents: 1
   m_DragThreshold: 5
 --- !u!4 &130677055
@@ -1114,6 +1114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highscoreTable: {fileID: 678581657}
+  maxNameLengt: 12
 --- !u!4 &633924259
 Transform:
   m_ObjectHideFlags: 0
@@ -1185,7 +1186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: .02079105, g: .602941155, b: 0, a: 1}
+  m_Color: {r: .509803951, g: .70588237, b: .97647059, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: d24cad22434350b4aa407fe460c8fe1a, type: 3}
     m_FontSize: 42

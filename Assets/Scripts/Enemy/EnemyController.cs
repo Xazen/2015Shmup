@@ -11,9 +11,13 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private float speed = 10.0f;
     [SerializeField]
-    private float fireRate = 1.0f;
+    private float maxFireRate = 2.5f;
     [SerializeField]
-    private float firstFireDelay = 0.5f;
+    private float minFireRate = 0.5f;
+    [SerializeField]
+    private float maxFirstFireDelay = 1.5f;
+    [SerializeField]
+    private float minFirstFireDelay = 0.5f;
 
     private Vector3 moveDirection = Vector3.zero;
 
@@ -98,6 +102,7 @@ public class EnemyController : MonoBehaviour
     private IEnumerator Fire()
     {
         // Wait for first fire delay
+        float firstFireDelay = UnityEngine.Random.Range(minFirstFireDelay, maxFirstFireDelay);
         for (float timer = 0; timer <= firstFireDelay; timer += Time.fixedDeltaTime)
         {
             yield return new WaitForFixedUpdate();
@@ -119,6 +124,7 @@ public class EnemyController : MonoBehaviour
             bullet.transform.rotation = this.transform.rotation;
          
             // Wait for fire rate
+            float fireRate = UnityEngine.Random.Range(minFireRate, maxFireRate);
             for (float timer = 0; timer <= fireRate; timer += Time.fixedDeltaTime)
             {
                 yield return new WaitForFixedUpdate();

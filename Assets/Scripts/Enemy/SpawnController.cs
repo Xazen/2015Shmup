@@ -11,6 +11,7 @@ public class SpawnController : MonoBehaviour
 
     [SerializeField]
     private float spawnRate = 3.0f;
+    [SerializeField]
     private float spawnMulitplier = 0.99f;
     private Border gameArea;
 

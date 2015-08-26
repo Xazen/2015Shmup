@@ -155,8 +155,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: -3
-  fireRate: 3
-  firstFireDelay: .5
+  maxFireRate: 2.5
+  minFireRate: .5
+  maxFirstFireDelay: 1.5
+  minFirstFireDelay: .5
   spawnPosition: 0
   scoreValue: 100
   collisionDamage: 1
@@ -210,6 +212,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: bulletPool
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: maxFireRate
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: minFireRate
+      value: .5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
