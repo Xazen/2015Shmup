@@ -20,7 +20,7 @@ public class KeyboardControl
 /// </summary>
 public class InputController : MonoBehaviour
 {
-    #region insprector
+    #region inspector
     public enum InputType
     {
         Keyboard,
@@ -29,8 +29,9 @@ public class InputController : MonoBehaviour
     }
 
     [SerializeField]
-    private InputType inputType = InputType.Keyboard;
+    public InputType inputType = InputType.Keyboard;
     public KeyboardControl keyboardKeyCodes;
+
     #endregion
 
     #region delegates

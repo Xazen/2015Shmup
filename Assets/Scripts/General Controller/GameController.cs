@@ -40,11 +40,15 @@ public class GameController : MonoBehaviour
 {
     public InputController inputController;
     public GameObject player;
+    [SerializeField]
+    private GameObject pauseScreen;
+    
+    [HideInInspector]
     public Border gameArea;
 
     private static GameController _instance;
 
-    private float pausedTimeScale;
+    private float pausedTimeScale = 1.0f;
 
     #region Singleton
     public static GameController instance
@@ -86,7 +90,7 @@ public class GameController : MonoBehaviour
         player.GetComponent<PlayerHealth>().healthDepletedEvent += OnHealthDepleted;
 
         // Setup variables
-        inputController = GetComponent<InputController>();
+        this.inputController = this.GetComponent<InputController>();
 
         // Get reference points to setup game area
         Vector3 lowerLeft = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, Camera.main.transform.position.y));
@@ -136,6 +140,8 @@ public class GameController : MonoBehaviour
         // Keep the current time scale
         pausedTimeScale = Time.timeScale;
         Time.timeScale = 0;
+
+        pauseScreen.SetActive(true);
     }
 
     /// <summary>
@@ -145,6 +151,8 @@ public class GameController : MonoBehaviour
     {
         // Return to previous time scale
         Time.timeScale = pausedTimeScale;
+
+        pauseScreen.SetActive(false);
     }
 
     /// <summary>
