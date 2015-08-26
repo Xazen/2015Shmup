@@ -72,16 +72,20 @@ public class EnemyController : MonoBehaviour
         {
             case SpawnPosition.Left:
                 moveDirection = Vector3.left;
+                transform.rotation = Quaternion.Euler(0, 90, 0);
                 break;
             case SpawnPosition.Bottom:
                 moveDirection = Vector3.back;
+                transform.rotation = Quaternion.identity;
                 break;
             case SpawnPosition.Right:
                 moveDirection = Vector3.right;
+                transform.rotation = Quaternion.Euler(0, 270, 0);
                 break;
             case SpawnPosition.Top:
             default:
                 moveDirection = Vector3.forward;
+                transform.rotation = Quaternion.Euler(0, 180, 0);
                 break;
         }
         GetComponent<Rigidbody>().velocity = moveDirection * speed;
