@@ -2,7 +2,7 @@
 ##Start in the Editor
 In the editor the game should be started from the "Main Scene" since it contains components which need to be kept alive throughout multiple scenes.
 
-##Used help
+##External Help
 ###Main Scene Controller
 The Main Scene Controller is based on this video. I added more members and function when I needed it throughout multiple scenes. 
 
@@ -28,11 +28,11 @@ The background had been created with images from CGTextures.
 
 [http://www.cgtextures.com/](http://www.cgtextures.com/ "CGTextures")
 
-##Tools
- - (Obviously) Unity3D
- - Visual Studio 3D
- - SourceTree
- - Photoshop
- - Blender
+##Tools and Versions
+ - Unity3D 5.1.1f1
+ - Microsoft Visual Studio 2013
+ - SourceTree 1.6.20.0
+ - Photoshop CC
+ - Blender 2.74
  
  
