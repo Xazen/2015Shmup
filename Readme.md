@@ -1,5 +1,15 @@
 #2015Shmup
-##Start in the Editor
+##How to play
+###Default Controls
+|   		| Keyboard  	| Mouse  				|
+|---		|---			|---					|
+| **Up**  	| Up Arrow  	| Move Mouse  			|
+| **Left**  | Left Arrow  	| Move Mouse  			|
+| **Down**  | Down Arrow  	| Move Mouse  			|
+| **Right** | Right Arrow  	| Move Mouse  			|
+| **Fire** 	| Space		  	| Left Mouse Button  	|
+
+###Start in the Editor
 In the editor the game should be started from the "Main Scene" since it contains components which need to be kept alive throughout multiple scenes.
 
 ##External Help
