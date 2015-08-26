@@ -171,7 +171,14 @@ public class GameController : MonoBehaviour
     public void OnHealthDepleted()
     {
         // Show game over screen
-        MainController.HighscoreController.RecentScore = player.GetComponent<PlayerScore>().Score;
+        if (MainController.HighscoreController != null)
+        {
+            MainController.HighscoreController.RecentScore = player.GetComponent<PlayerScore>().Score;
+        }
+        else
+        {
+            Debug.LogError("Please start the game from the Main Scene.", this);
+        }
         ShowGameOver();
     }
     #endregion

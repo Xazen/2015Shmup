@@ -273,7 +273,7 @@ GameObject:
   - 222: {fileID: 260053832}
   - 114: {fileID: 260053831}
   m_Layer: 5
-  m_Name: Pause
+  m_Name: PauseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -291,7 +291,7 @@ RectTransform:
   m_Children:
   - {fileID: 977937257}
   - {fileID: 805783201}
-  m_Father: {fileID: 491783206}
+  m_Father: {fileID: 1419905206}
   m_RootOrder: 2
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -401,7 +401,18 @@ MonoBehaviour:
   m_Group: {fileID: 1337649094}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 0
@@ -552,7 +563,6 @@ RectTransform:
   m_Children:
   - {fileID: 1452336398}
   - {fileID: 907845041}
-  - {fileID: 260053830}
   m_Father: {fileID: 1419905206}
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
@@ -640,6 +650,10 @@ Prefab:
       propertyPath: spawnRate
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 11457508, guid: bf7963c896843774e8e8ff1df10a54ce, type: 2}
+      propertyPath: pauseScreen
+      value: 
+      objectReference: {fileID: 1906620965}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bf7963c896843774e8e8ff1df10a54ce, type: 2}
   m_IsPrefabParent: 0
@@ -1118,7 +1132,7 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: .100000001
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 21300000, guid: 7fe27d473ade14146978861f92cf678b,
+    m_HighlightedSprite: {fileID: 21300000, guid: 5582d1b1b521dcd4c95ae8fc5463334e,
       type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 7fe27d473ade14146978861f92cf678b, type: 3}
     m_DisabledSprite: {fileID: 21300000, guid: 7fe27d473ade14146978861f92cf678b, type: 3}
@@ -1749,6 +1763,7 @@ RectTransform:
   m_Children:
   - {fileID: 491783206}
   - {fileID: 1906620966}
+  - {fileID: 260053830}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_AnchorMin: {x: 0, y: 0}
