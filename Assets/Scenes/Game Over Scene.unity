@@ -1063,7 +1063,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1434753358}
-        m_MethodName: StartGame
+        m_MethodName: SwitchToGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1317,7 +1317,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1434753358}
-        m_MethodName: ReturnToMenu
+        m_MethodName: SwitchToMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

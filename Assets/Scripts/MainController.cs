@@ -26,7 +26,6 @@ public class MainController : MonoBehaviour
 
     #region further singletons
     public static HighscoreController HighscoreController;
-    public static PlayerScore PlayerScore;
     #endregion
 
     #region variables
@@ -80,7 +79,6 @@ public class MainController : MonoBehaviour
 
         // Setup further singletons
         HighscoreController = GetComponent<HighscoreController>();
-        PlayerScore = GetComponent<PlayerScore>();
 
         // Setup the array of updateDelegates
         updateDelegates = new UpdateDelegate[(int)SceneState.Count];
@@ -115,11 +113,6 @@ public class MainController : MonoBehaviour
         if (HighscoreController != null)
         {
             HighscoreController = null;
-        }
-
-        if (PlayerScore != null)
-        {
-            PlayerScore = null;
         }
 
         // Clean up singleton

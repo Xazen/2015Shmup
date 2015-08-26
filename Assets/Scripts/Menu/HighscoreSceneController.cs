@@ -5,7 +5,7 @@ using System.Collections;
 /// <summary>
 /// Controls the highscore scene.
 /// </summary>
-public class HighscoreSceneController : MonoBehaviour 
+public class HighscoreSceneController : SceneController 
 {
     [SerializeField]
     private GameObject highscoreTable;
@@ -35,16 +35,6 @@ public class HighscoreSceneController : MonoBehaviour
             scoreText.text = highscoreEntry.Score.ToString();
         }
     }
-
-    #region actions
-    /// <summary>
-    /// Return to main menu
-    /// </summary>
-    public void ReturnToMenu()
-    {
-        MainController.SwitchScene(MainController.SceneNames.MENU_SCENE);
-    }
-    #endregion
 
     #region destroy
     protected void OnDestroy()

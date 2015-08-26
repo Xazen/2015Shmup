@@ -5,7 +5,7 @@ using System.Collections;
 /// <summary>
 /// Controls the game over screen
 /// </summary>
-public class GameOverController : MonoBehaviour 
+public class GameOverController : SceneController 
 {
     [SerializeField]
     private Text highscoreEntryText;
@@ -31,16 +31,16 @@ public class GameOverController : MonoBehaviour
     #endregion
 
     #region actions
-    public void StartGame()
+    public override void SwitchToGame()
     {
         MainController.HighscoreController.AddHighscoreEntry(inputField.text, MainController.HighscoreController.RecentScore);
-        MainController.SwitchScene(MainController.SceneNames.GAME_SCENE);
+        base.SwitchToGame();
     }
 
-    public void ReturnToMenu()
+    public override void SwitchToMenu()
     {
         MainController.HighscoreController.AddHighscoreEntry(inputField.text, MainController.HighscoreController.RecentScore);
-        MainController.SwitchScene(MainController.SceneNames.MENU_SCENE);
+        base.SwitchToMenu();
     }
     #endregion
 

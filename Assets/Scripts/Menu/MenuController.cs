@@ -5,7 +5,7 @@ using System.Collections;
 /// <summary>
 /// Manages the menu screen
 /// </summary>
-public class MenuController : MonoBehaviour 
+public class MenuController : SceneController 
 {
     [SerializeField]
     private Text highscoreUI;
@@ -13,15 +13,5 @@ public class MenuController : MonoBehaviour
     protected void Awake()
     {
         highscoreUI.text = MainController.HighscoreController.highscoreEntries[0].Score.ToString();
-    }
-
-    public void StartGame()
-    {
-        MainController.SwitchScene(MainController.SceneNames.GAME_SCENE);
-    }
-
-    public void OpenHighscoreScene()
-    {
-        MainController.SwitchScene(MainController.SceneNames.HIGHSCORE_SCENE);
     }
 }

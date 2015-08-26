@@ -36,7 +36,7 @@ public struct Border
 /// <summary>
 /// Manages all game objects that need to be accessible by various different scripts
 /// </summary>
-public class GameController : MonoBehaviour 
+public class GameController : SceneController 
 {
     public InputController inputController;
     public GameObject player;
@@ -154,14 +154,6 @@ public class GameController : MonoBehaviour
 
         pauseScreen.SetActive(false);
     }
-
-    /// <summary>
-    /// Show game over screen
-    /// </summary>
-    public void ShowGameOver()
-    {
-        MainController.SwitchScene(MainController.SceneNames.GAME_OVER_SCENE);
-    }
     #endregion
 
     #region events
@@ -179,7 +171,7 @@ public class GameController : MonoBehaviour
         {
             Debug.LogError("Please start the game from the Main Scene.", this);
         }
-        ShowGameOver();
+        SwitchToGameOver();
     }
     #endregion
 
