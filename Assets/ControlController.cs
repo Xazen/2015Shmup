@@ -35,7 +35,7 @@ public class ControlController : MonoBehaviour
         keyboardToggle.onValueChanged.AddListener(OnKeyboardValueChanged);
 
         // Set toggle base on current input type
-        if (inputController.inputType == InputController.InputType.Mouse)
+        if (inputController.GameInputType == InputController.InputType.Mouse)
         {
             mouseToggle.isOn = true;
         }
@@ -54,11 +54,11 @@ public class ControlController : MonoBehaviour
         mouseToggle.isOn = value;
         if (value)
         {
-            inputController.inputType = InputController.InputType.Mouse;
+            inputController.GameInputType = InputController.InputType.Mouse;
         }
         else
         {
-            inputController.inputType = InputController.InputType.Keyboard;
+            inputController.GameInputType = InputController.InputType.Keyboard;
         }
     }
 
@@ -70,11 +70,11 @@ public class ControlController : MonoBehaviour
         keyboardToggle.isOn = value;
         if (value)
         {
-            inputController.inputType = InputController.InputType.Keyboard;
+            inputController.GameInputType = InputController.InputType.Keyboard;
         }
         else
         {
-            inputController.inputType = InputController.InputType.Mouse;
+            inputController.GameInputType = InputController.InputType.Mouse;
         }
     }
 }

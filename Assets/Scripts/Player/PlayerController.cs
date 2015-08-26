@@ -51,6 +51,8 @@ public class PlayerController : MonoBehaviour
         inputController.keyHoldDelegate += OnKeyHold;
         inputController.keyUpDelegate += OnKeyUp;
         inputController.mousePositionChangedDelegate += OnMousePositionChanged;
+
+        inputController.onGameInputTypeChanged += OnGameInputTypeChanged;
 	}
     #endregion
 
@@ -222,6 +224,19 @@ public class PlayerController : MonoBehaviour
     {
         mouseTargetPosition = newPosition;
         moveDirection = (newPosition-this.transform.position).normalized;
+    }
+
+    private void OnGameInputTypeChanged(InputController.InputType inputType)
+    {
+        // New input type keyboard?
+        if (inputType == InputController.InputType.Keyboard)
+        {
+            // Set mouse target position to the current position to avoid unintentional movement
+            mouseTargetPosition = this.transform.position;
+        }
+
+        // Stop the last fire coroutine since the player probably released the fire button
+        StopCoroutine("Fire");
     }
     #endregion
 

@@ -29,19 +29,40 @@ public class InputController : MonoBehaviour
     }
 
     [SerializeField]
-    public InputType inputType = InputType.Keyboard;
+    private InputType gameInputType = InputType.Keyboard;
+    public InputType GameInputType
+    {
+        set
+        {
+            if (onGameInputTypeChanged != null)
+            {
+                onGameInputTypeChanged(value);
+            }
+            gameInputType = value;
+        }
+
+        get
+        {
+            return gameInputType;
+        }
+    }
+
     public KeyboardControl keyboardKeyCodes;
 
     #endregion
 
     #region delegates
     public delegate void KeyCodeDelegate(KeyCode keyCode);
-    public delegate void Vector3Delegate(Vector3 vector3);
     
     public KeyCodeDelegate keyDownDelegate;
     public KeyCodeDelegate keyHoldDelegate;
     public KeyCodeDelegate keyUpDelegate;
+
+    public delegate void Vector3Delegate(Vector3 vector3);
     public Vector3Delegate mousePositionChangedDelegate;
+
+    public delegate void InputTypeDelegate(InputType inputType);
+    public event InputTypeDelegate onGameInputTypeChanged;
     #endregion
 
     private Vector3 currentMousePosition;
@@ -51,7 +72,7 @@ public class InputController : MonoBehaviour
 	protected void Update () 
     {
         // Is keyboard input?
-        if (inputType == InputType.Keyboard)
+        if (this.GameInputType == InputType.Keyboard)
         {
             // Call keyboard control delegate
             this.CallKeyDelegate(keyboardKeyCodes.up);
@@ -61,7 +82,7 @@ public class InputController : MonoBehaviour
             this.CallKeyDelegate(keyboardKeyCodes.shoot);
         }
         // Is mouse input?
-        else if (inputType == InputType.Mouse)
+        else if (this.GameInputType == InputType.Mouse)
         {
             // Call delegate for mouse button
             this.CallKeyDelegate(KeyCode.Mouse0);
