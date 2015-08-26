@@ -5,7 +5,7 @@ using System.Collections;
 /// <summary>
 /// Controls the game over screen
 /// </summary>
-public class GameOverController : SceneController 
+public class GameOverSceneController : SceneController 
 {
     [SerializeField]
     private Text highscoreEntryText;

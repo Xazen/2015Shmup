@@ -36,7 +36,7 @@ public struct Border
 /// <summary>
 /// Manages all game objects that need to be accessible by various different scripts
 /// </summary>
-public class GameController : SceneController 
+public class GameSceneController : SceneController 
 {
     public InputController inputController;
     public GameObject player;
@@ -46,18 +46,18 @@ public class GameController : SceneController
     [HideInInspector]
     public Border gameArea;
 
-    private static GameController _instance;
+    private static GameSceneController _instance;
 
     private float pausedTimeScale = 1.0f;
 
     #region Singleton
-    public static GameController instance
+    public static GameSceneController instance
     {
         get
         {
             if (_instance == null)
             {
-                _instance = GameObject.FindObjectOfType<GameController>();
+                _instance = GameObject.FindObjectOfType<GameSceneController>();
             }
 
             return _instance;

@@ -31,7 +31,7 @@ public class SpawnController : MonoBehaviour
         Bullet.TriggerEvent += OnBulletTriggerEnter;
 
         // Get game area
-        gameArea = GameController.instance.gameArea;
+        gameArea = GameSceneController.instance.gameArea;
 
         // Spawn enemies
         StartCoroutine("SpawnEnemies");

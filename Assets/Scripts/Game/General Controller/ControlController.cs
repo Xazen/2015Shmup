@@ -15,7 +15,7 @@ public class ControlController : MonoBehaviour
     #region setup
     protected void Start()
     {
-        inputController = GameController.instance.inputController;
+        inputController = GameSceneController.instance.inputController;
 
         this.Initialize();
     }

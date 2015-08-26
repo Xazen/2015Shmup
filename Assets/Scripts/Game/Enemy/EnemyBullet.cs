@@ -23,7 +23,7 @@ public class EnemyBullet : Bullet
     protected void Awake()
     {
         // Get the player
-        target = GameController.instance.player;
+        target = GameSceneController.instance.player;
     }
 
     protected void OnEnable()

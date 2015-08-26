@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
         PlayerBullet.TriggerEvent += OnBulletCollision;
         
         // Setup keyboard control
-        InputController inputController = GameController.instance.inputController;
+        InputController inputController = GameSceneController.instance.inputController;
         keyboardControl = inputController.keyboardKeyCodes;
 
         // Setup input delegates
@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Keep the player inside the game area
-        Border gameArea = GameController.instance.gameArea;
+        Border gameArea = GameSceneController.instance.gameArea;
         Vector3 playerSize = GetComponent<Collider>().bounds.size;
         if (transform.position.x + playerSize.x / 2 > gameArea.right)
         {

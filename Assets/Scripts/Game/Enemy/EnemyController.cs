@@ -141,7 +141,7 @@ public class EnemyController : MonoBehaviour
     /// <returns>Return true when the enemy is at the border. False otherwise</returns>
     private bool WillBecomeInvisible()
     {
-        Border gameArea = GameController.instance.gameArea;
+        Border gameArea = GameSceneController.instance.gameArea;
         Vector3 enemySize = GetComponent<Collider>().bounds.size;
 
         if ((transform.position.x + enemySize.x / 2 > gameArea.right &&

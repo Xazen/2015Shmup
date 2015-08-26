@@ -5,7 +5,7 @@ using System.Collections;
 /// <summary>
 /// Manages the menu screen
 /// </summary>
-public class MenuController : SceneController 
+public class MenuSceneController : SceneController 
 {
     [SerializeField]
     private Text highscoreUI;
