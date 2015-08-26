@@ -24,8 +24,8 @@ public class GameOverController : MonoBehaviour
 
         if (!MainController.HighscoreController.IsValid(MainController.HighscoreController.RecentScore))
         {
-            highscoreEntryText.text = "Yeah! No Highscore!";
-            inputField.placeholder.GetComponent<Text>().text = "You like to be in? Try it!";
+            highscoreEntryText.text = "Final Score";
+            inputField.gameObject.SetActive(false);
         }
     }
     #endregion

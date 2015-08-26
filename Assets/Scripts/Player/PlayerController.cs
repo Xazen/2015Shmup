@@ -117,7 +117,6 @@ public class PlayerController : MonoBehaviour
         {
             // Reduce health
             damage = col.gameObject.GetComponent<EnemyController>().collisionDamage;
-            playerHealth.DecreaseLife(damage);
         }
 
         // Collided with enemy bullet?

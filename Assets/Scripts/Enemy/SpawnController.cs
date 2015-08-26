@@ -193,7 +193,8 @@ public class SpawnController : MonoBehaviour
     public void OnEnemyTriggerEnter(GameObject gameObject, Collider col)
     {
         // Enemy got hit by player bullet?
-        if (col.CompareTag(MainController.Tags.PLAYER_BULLET))
+        if (col.CompareTag(MainController.Tags.PLAYER_BULLET) ||
+            col.CompareTag(MainController.Tags.PLAYER))
         {
             // Return enemy to pool
             enemyPool.ReturnGameObject(gameObject);
