@@ -85,9 +85,6 @@ public class GameController : MonoBehaviour
         // Setup player health delegate
         player.GetComponent<PlayerHealth>().healthDepletedEvent += OnHealthDepleted;
 
-        // Setup UI for player score
-        MainController.PlayerScore.Initialize(GameObject.FindObjectOfType<ScoreUI>());
-
         // Setup variables
         inputController = GetComponent<InputController>();
 
@@ -160,8 +157,13 @@ public class GameController : MonoBehaviour
     #endregion
 
     #region events
+    /// <summary>
+    /// Called when the health of the player is empty
+    /// </summary>
     public void OnHealthDepleted()
     {
+        // Show game over screen
+        MainController.HighscoreController.RecentScore = player.GetComponent<PlayerScore>().Score;
         ShowGameOver();
     }
     #endregion

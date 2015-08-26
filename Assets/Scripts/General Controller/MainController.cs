@@ -26,7 +26,7 @@ public class MainController : MonoBehaviour
 
     #region further singletons
     public static HighscoreController HighscoreController;
-    public static ScoreController PlayerScore;
+    public static PlayerScore PlayerScore;
     #endregion
 
     #region variables
@@ -66,7 +66,6 @@ public class MainController : MonoBehaviour
     #region Unity methods
     protected void Awake()
     {
-
         // Setup singleton
         if (mainController == null)
         {
@@ -81,7 +80,7 @@ public class MainController : MonoBehaviour
 
         // Setup further singletons
         HighscoreController = GetComponent<HighscoreController>();
-        PlayerScore = GetComponent<ScoreController>();
+        PlayerScore = GetComponent<PlayerScore>();
 
         // Setup the array of updateDelegates
         updateDelegates = new UpdateDelegate[(int)SceneState.Count];

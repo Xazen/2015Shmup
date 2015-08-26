@@ -30,6 +30,10 @@ public class HighscoreController : MonoBehaviour
     private static HighscoreController _instance;
     private static string persistentDataName = "highscoreEntries.dat";
 
+    [HideInInspector]
+    public int RecentScore = 0;
+
+    [HideInInspector]
     public List<HighscoreEntry> highscoreEntries;
 
     #region setup
