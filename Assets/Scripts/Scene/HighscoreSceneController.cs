@@ -11,7 +11,7 @@ public class HighscoreSceneController : SceneController
     private GameObject highscoreTable;
 
     [SerializeField]
-    private int maxNameLengt = 12;
+    private int maxNameLength = 12;
 
     protected void Start()
     {
@@ -28,7 +28,7 @@ public class HighscoreSceneController : SceneController
             Text nameText = row.transform.GetChild(1).gameObject.GetComponent<Text>();
 
             // Set the name with max 10 characters
-            nameText.text = highscoreEntry.Name.Substring(0, Mathf.Min(highscoreEntry.Name.Length, maxNameLengt));
+            nameText.text = highscoreEntry.Name.Substring(0, Mathf.Min(highscoreEntry.Name.Length, maxNameLength));
 
             // Assign score to text ui
             Text scoreText = row.transform.GetChild(2).gameObject.GetComponent<Text>();
